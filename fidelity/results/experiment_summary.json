@@ -1,0 +1,14 @@
+{
+  "geo_noise_0_1m": "geo_noise_0_1m",
+  "geo_noise_0_5m": "geo_noise_0_5m",
+  "geo_noise_2m": "geo_noise_2m",
+  "geo_noise_3m": "geo_noise_3m",
+  "geo_noise_4m": "geo_noise_4m",
+  "geo_noise_7m": "geo_noise_7m",
+  "rt_500k_rays": "rt_500k_rays",
+  "rt_200k_rays": "rt_200k_rays",
+  "rt_50k_rays": "rt_50k_rays",
+  "rt_20k_rays": "rt_20k_rays",
+  "rt_5k_rays": "rt_5k_rays",
+  "rt_1k_rays": "rt_1k_rays"
+}

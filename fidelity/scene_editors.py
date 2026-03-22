@@ -53,10 +53,11 @@ def add_position_noise(scene: Scene, std: float, seed: int = 42) -> None:
         noise_x = rng.normal(0, std)
         noise_y = rng.normal(0, std)
 
+        pos_arr = np.array(current_pos)
         new_pos = mi.Vector3f(
-            float(current_pos[0]) + noise_x,
-            float(current_pos[1]) + noise_y,
-            float(current_pos[2]),  # Keep Z unchanged
+            float(pos_arr[0]) + noise_x,
+            float(pos_arr[1]) + noise_y,
+            float(pos_arr[2]),  # Keep Z unchanged
         )
         obj.position = new_pos
 
@@ -84,15 +85,16 @@ def add_height_noise(scene: Scene, std: float, seed: int = 42) -> None:
             continue
 
         current_pos = obj.position
-        height = float(current_pos[2])
+        pos_arr = np.array(current_pos)
+        height = float(pos_arr[2])
 
         # Add noise directly to height (can't go below ground)
         noise_z = rng.normal(0, std)
         new_height = max(0.5, height + noise_z)  # Minimum 0.5m
 
         obj.position = mi.Vector3f(
-            float(current_pos[0]),
-            float(current_pos[1]),
+            float(pos_arr[0]),
+            float(pos_arr[1]),
             new_height,
         )
 
@@ -119,12 +121,15 @@ def remove_small_buildings(scene: Scene, min_height: float) -> None:
         # In Sionna scenes from OSM, building height is typically encoded
         # in the mesh extent, not just the position. We use position Z
         # as a heuristic when mesh data isn't easily accessible.
-        height = float(obj.position[2])
+        height = float(np.array(obj.position)[2])
         if height > 0 and height < min_height:
             to_remove.append(obj_name)
 
     for name in to_remove:
-        scene.remove(name)
+        try:
+            scene.remove(name)
+        except Exception:
+            pass
 
     print(f"[scene_editor] Removed {len(to_remove)} buildings below {min_height}m")
 
@@ -151,7 +156,10 @@ def remove_random_buildings(scene: Scene, fraction: float, seed: int = 42) -> No
     to_remove = random.sample(building_names, n_remove)
 
     for name in to_remove:
-        scene.remove(name)
+        try:
+            scene.remove(name)
+        except Exception:
+            pass
 
     print(
         f"[scene_editor] Randomly removed {len(to_remove)}/{len(building_names)} "

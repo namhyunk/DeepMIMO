@@ -64,8 +64,8 @@ def compute_path_loss_error(
         Dict with RMSE, MAE, and correlation of total received power.
     """
     # Total received power (sum over paths)
-    bl_total = baseline_pwr.sum(axis=-1) if baseline_pwr.ndim > 1 else baseline_pwr
-    dg_total = degraded_pwr.sum(axis=-1) if degraded_pwr.ndim > 1 else degraded_pwr
+    bl_total = np.nansum(baseline_pwr, axis=-1) if baseline_pwr.ndim > 1 else baseline_pwr
+    dg_total = np.nansum(degraded_pwr, axis=-1) if degraded_pwr.ndim > 1 else degraded_pwr
 
     # Convert to dB (avoid log of zero)
     eps = 1e-30
@@ -211,11 +211,11 @@ def compare_datasets(baseline_name: str, degraded_name: str) -> dict:
             # RMS delay spread per user
             def rms_delay_spread(toa, pwr):
                 """Compute RMS delay spread."""
-                total_pwr = pwr.sum(axis=-1, keepdims=True)
+                total_pwr = np.nansum(pwr, axis=-1, keepdims=True)
                 total_pwr = np.maximum(total_pwr, 1e-30)
-                mean_delay = (toa * pwr).sum(axis=-1, keepdims=True) / total_pwr
+                mean_delay = np.nansum(toa * pwr, axis=-1, keepdims=True) / total_pwr
                 ds = np.sqrt(
-                    (pwr * (toa - mean_delay) ** 2).sum(axis=-1) / total_pwr.squeeze()
+                    np.nansum(pwr * (toa - mean_delay) ** 2, axis=-1) / total_pwr.squeeze()
                 )
                 return ds
 

@@ -1,0 +1,564 @@
+==== 1. Baseline ====
+TX positions: 1 stations
+RX positions: 441 users
+
+############################################################
+  FIDELITY EXPERIMENT
+  Configs: 1
+  Scene: 
+  Output: /home/namhyunk/nokia/DeepMIMO/fidelity/results
+############################################################
+
+
+[1/1] 
+============================================================
+  Running: baseline
+  Description: Full fidelity: 5 reflections, 1M rays, real materials, iso antenna
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ baseline FAILED: string index out of range
+
+############################################################
+  EXPERIMENT COMPLETE
+  Results: 0/1 succeeded
+  Summary: /home/namhyunk/nokia/DeepMIMO/fidelity/results/experiment_summary.json
+############################################################
+
+==== 2. Geometry ====
+TX positions: 1 stations
+RX positions: 441 users
+
+############################################################
+  FIDELITY EXPERIMENT
+  Configs: 7
+  Scene: 
+  Output: /home/namhyunk/nokia/DeepMIMO/fidelity/results
+############################################################
+
+
+[1/7] 
+============================================================
+  Running: baseline
+  Description: Full fidelity: 5 reflections, 1M rays, real materials, iso antenna
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ baseline FAILED: string index out of range
+
+[2/7] 
+============================================================
+  Running: geo_noise_1m
+  Description: Geometry: add 1m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=1.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_1m FAILED: string index out of range
+
+[3/7] 
+============================================================
+  Running: geo_noise_5m
+  Description: Geometry: add 5m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=5.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_5m FAILED: string index out of range
+
+[4/7] 
+============================================================
+  Running: geo_noise_10m
+  Description: Geometry: add 10m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=10.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_10m FAILED: string index out of range
+
+[5/7] 
+============================================================
+  Running: geo_height_noise_3m
+  Description: Geometry: add 3m noise to building heights
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding height noise σ=3.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_height_noise_3m FAILED: string index out of range
+
+[6/7] 
+============================================================
+  Running: geo_remove_small
+  Description: Geometry: remove buildings shorter than 5m
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Removing buildings below 5.0m
+[scene_editor] Removed 0 buildings below 5.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_remove_small FAILED: string index out of range
+
+[7/7] 
+============================================================
+  Running: geo_remove_30pct
+  Description: Geometry: randomly remove 30% of buildings
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Removing 30% of buildings
+[scene_editor] Randomly removed 1/6 buildings (30%)
+Added BS_0 at position [20. 20. 10.]
+==== 1. Baseline ====
+TX positions: 1 stations
+RX positions: 441 users
+
+############################################################
+  FIDELITY EXPERIMENT
+  Configs: 1
+  Scene: 
+  Output: /home/namhyunk/nokia/DeepMIMO/fidelity/results
+############################################################
+
+
+[1/1] 
+============================================================
+  Running: baseline
+  Description: Full fidelity: 5 reflections, 1M rays, real materials, iso antenna
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ baseline FAILED: too many indices for array: array is 3-dimensional, but 5 were indexed
+
+############################################################
+  EXPERIMENT COMPLETE
+  Results: 0/1 succeeded
+  Summary: /home/namhyunk/nokia/DeepMIMO/fidelity/results/experiment_summary.json
+############################################################
+
+==== 2. Geometry ====
+TX positions: 1 stations
+RX positions: 441 users
+
+############################################################
+  FIDELITY EXPERIMENT
+  Configs: 7
+  Scene: 
+  Output: /home/namhyunk/nokia/DeepMIMO/fidelity/results
+############################################################
+
+
+[1/7] 
+============================================================
+  Running: baseline
+  Description: Full fidelity: 5 reflections, 1M rays, real materials, iso antenna
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ baseline FAILED: too many indices for array: array is 3-dimensional, but 5 were indexed
+
+[2/7] 
+============================================================
+  Running: geo_noise_1m
+  Description: Geometry: add 1m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=1.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_1m FAILED: too many indices for array: array is 3-dimensional, but 5 were indexed
+
+[3/7] 
+============================================================
+  Running: geo_noise_5m
+  Description: Geometry: add 5m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=5.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_5m FAILED: too many indices for array: array is 3-dimensional, but 5 were indexed
+
+[4/7] 
+============================================================
+  Running: geo_noise_10m
+  Description: Geometry: add 10m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=10.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_10m FAILED: too many indices for array: array is 3-dimensional, but 5 were indexed
+
+[5/7] 
+============================================================
+  Running: geo_height_noise_3m
+  Description: Geometry: add 3m noise to building heights
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding height noise σ=3.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_height_noise_3m FAILED: too many indices for array: array is 3-dimensional, but 5 were indexed
+
+[6/7] 
+============================================================
+  Running: geo_remove_small
+  Description: Geometry: remove buildings shorter than 5m
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Removing buildings below 5.0m
+[scene_editor] Removed 0 buildings below 5.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_remove_small FAILED: too many indices for array: array is 3-dimensional, but 5 were indexed
+
+[7/7] 
+============================================================
+  Running: geo_remove_30pct
+  Description: Geometry: randomly remove 30% of buildings
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Removing 30% of buildings
+[scene_editor] Randomly removed 1/6 buildings (30%)
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_remove_30pct FAILED: too many indices for array: array is 3-dimensional, but 5 were indexed
+
+############################################################
+  EXPERIMENT COMPLETE
+  Results: 0/7 succeeded
+  Summary: /home/namhyunk/nokia/DeepMIMO/fidelity/results/experiment_summary.json
+############################################################
+
+==== 3. All ====
+==== 1. Baseline ====
+TX positions: 1 stations
+RX positions: 441 users
+
+############################################################
+  FIDELITY EXPERIMENT
+  Configs: 1
+  Scene: 
+  Output: /home/namhyunk/nokia/DeepMIMO/fidelity/results
+############################################################
+
+
+[1/1] 
+============================================================
+  Running: baseline
+  Description: Full fidelity: 5 reflections, 1M rays, real materials, iso antenna
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ baseline FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+############################################################
+  EXPERIMENT COMPLETE
+  Results: 0/1 succeeded
+  Summary: /home/namhyunk/nokia/DeepMIMO/fidelity/results/experiment_summary.json
+############################################################
+
+==== 2. Geometry ====
+TX positions: 1 stations
+RX positions: 441 users
+
+############################################################
+  FIDELITY EXPERIMENT
+  Configs: 7
+  Scene: 
+  Output: /home/namhyunk/nokia/DeepMIMO/fidelity/results
+############################################################
+
+
+[1/7] 
+============================================================
+  Running: baseline
+  Description: Full fidelity: 5 reflections, 1M rays, real materials, iso antenna
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ baseline FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+[2/7] 
+============================================================
+  Running: geo_noise_1m
+  Description: Geometry: add 1m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=1.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_1m FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+[3/7] 
+============================================================
+  Running: geo_noise_5m
+  Description: Geometry: add 5m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=5.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_5m FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+[4/7] 
+============================================================
+  Running: geo_noise_10m
+  Description: Geometry: add 10m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=10.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_10m FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+[5/7] 
+============================================================
+  Running: geo_height_noise_3m
+  Description: Geometry: add 3m noise to building heights
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding height noise σ=3.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_height_noise_3m FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+[6/7] 
+============================================================
+  Running: geo_remove_small
+  Description: Geometry: remove buildings shorter than 5m
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Removing buildings below 5.0m
+[scene_editor] Removed 0 buildings below 5.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_remove_small FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+[7/7] 
+============================================================
+  Running: geo_remove_30pct
+  Description: Geometry: randomly remove 30% of buildings
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Removing 30% of buildings
+[scene_editor] Randomly removed 1/6 buildings (30%)
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_remove_30pct FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+############################################################
+  EXPERIMENT COMPLETE
+  Results: 0/7 succeeded
+  Summary: /home/namhyunk/nokia/DeepMIMO/fidelity/results/experiment_summary.json
+############################################################
+
+==== 3. All ====
+TX positions: 1 stations
+RX positions: 441 users
+
+############################################################
+  FIDELITY EXPERIMENT
+  Configs: 17
+  Scene: 
+  Output: /home/namhyunk/nokia/DeepMIMO/fidelity/results
+############################################################
+
+
+[1/17] 
+============================================================
+  Running: baseline
+  Description: Full fidelity: 5 reflections, 1M rays, real materials, iso antenna
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ baseline FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+[2/17] 
+============================================================
+  Running: geo_noise_1m
+  Description: Geometry: add 1m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=1.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_1m FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+[3/17] 
+============================================================
+  Running: geo_noise_5m
+  Description: Geometry: add 5m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=5.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_5m FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+[4/17] 
+============================================================
+  Running: geo_noise_10m
+  Description: Geometry: add 10m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=10.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✗ geo_noise_10m FAILED: too many indices for array: array is 2-dimensional, but 3 were indexed
+
+[5/17] 
+============================================================
+  Running: geo_height_noise_3m
+  Description: Geometry: add 3m noise to building heights
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding height noise σ=3.0m
+Added BS_0 at position [20. 20. 10.]

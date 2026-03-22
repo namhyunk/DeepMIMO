@@ -321,6 +321,8 @@ def run_experiment(
             )
             results[config.name] = scen_name
         except Exception as e:
+            import traceback
+            traceback.print_exc()
             print(f"\n  ✗ {config.name} FAILED: {e}")
             results[config.name] = f"ERROR: {e}"
 

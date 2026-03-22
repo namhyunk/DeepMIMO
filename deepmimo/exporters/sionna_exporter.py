@@ -263,6 +263,9 @@ def export_scene_rt_params(scene: Scene, **compute_paths_kwargs: Any) -> dict[st
 
     default_compute_paths_params.update(compute_paths_kwargs)
     raw_params = {**rt_params_dict, **default_compute_paths_params}
+    
+    # Filter callables out to prevent PicklingError
+    raw_params = {k: v for k, v in raw_params.items() if not callable(v)}
 
     # Mapping from Sionna 1.0.2 to common (0.19 / DeepMIMO) parameters
     newer_params_mapping = (
@@ -299,7 +302,9 @@ def export_scene_buildings(scene: Scene) -> tuple[np.ndarray, dict]:
     scene_objects = _get_scene_objects(scene)
     for obj_name, obj in scene_objects.items():
         # Get vertices
-        shape = obj._mi_shape  # noqa: SLF001  (necessary)
+        shape = getattr(obj, "_mi_shape", getattr(obj, "_shape", getattr(obj, "shape", None)))
+        if shape is None:
+            continue
         n_v = shape.vertex_count()
         obj_vertices = np.array(shape.vertex_position(np.arange(n_v)))
         if sionna_v1:
@@ -375,7 +380,8 @@ def sionna_exporter(
     rt_params = export_scene_rt_params(scene, **my_compute_path_params)
     vertice_matrix, obj_index_map = export_scene_buildings(scene)
 
-    os.makedirs(save_folder, exist_ok=True)  # noqa: PTH103
+    if save_folder:
+        os.makedirs(save_folder, exist_ok=True)
 
     save_vars_dict = {
         # filename: variable_to_save

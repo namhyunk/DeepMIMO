@@ -158,7 +158,11 @@ def _process_paths_batch(  # noqa: PLR0913, PLR0915
 
     else:  # Single antenna case
         # For single antenna, we need to extract the correct dimensions
-        a = a[:, 0, tx_idx, 0, :]  # Remove antenna dimensions
+        if a.ndim == 3:
+            a = a[:, tx_idx, :]
+        else:
+            a = a[:, 0, tx_idx, 0, :]  # Remove antenna dimensions
+            
         tau = tau[:, tx_idx, :]
         phi_r = phi_r[:, tx_idx, :]
         phi_t = phi_t[:, tx_idx, :]
@@ -167,7 +171,7 @@ def _process_paths_batch(  # noqa: PLR0913, PLR0915
         vertices = vertices[:, :, tx_idx, ...]
 
         if not sionna_v1:
-            types = types[:, 0, tx_idx, 0, :]
+            types = types[:, 0, tx_idx, 0, :] if types.ndim == 5 else types[:, tx_idx, :]
 
     n_rx = a.shape[0]
     for rel_rx_idx in range(n_rx):

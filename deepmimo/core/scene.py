@@ -12,7 +12,10 @@ from typing import TYPE_CHECKING, Any, ClassVar, Literal
 
 import matplotlib.pyplot as plt
 import numpy as np
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+try:
+    from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+except ImportError:
+    Poly3DCollection = None
 from scipy.spatial import ConvexHull
 
 from deepmimo.consts import MAT_FMT, SCENE_PARAM_NUMBER_SCENES

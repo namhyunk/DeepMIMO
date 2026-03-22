@@ -105,6 +105,14 @@ BASELINE = FidelityConfig(
 
 # --- Geometry presets ---
 
+GEO_NOISE_0_1M = FidelityConfig(
+    name="geo_noise_0_1m", position_noise_std=0.1, description="Geometry: add 0.1m Gaussian noise", tags=["geometry"]
+)
+
+GEO_NOISE_0_5M = FidelityConfig(
+    name="geo_noise_0_5m", position_noise_std=0.5, description="Geometry: add 0.5m Gaussian noise", tags=["geometry"]
+)
+
 GEO_NOISE_1M = FidelityConfig(
     name="geo_noise_1m",
     position_noise_std=1.0,
@@ -112,11 +120,27 @@ GEO_NOISE_1M = FidelityConfig(
     tags=["geometry"],
 )
 
+GEO_NOISE_2M = FidelityConfig(
+    name="geo_noise_2m", position_noise_std=2.0, description="Geometry: add 2m Gaussian noise", tags=["geometry"]
+)
+
+GEO_NOISE_3M = FidelityConfig(
+    name="geo_noise_3m", position_noise_std=3.0, description="Geometry: add 3m Gaussian noise", tags=["geometry"]
+)
+
+GEO_NOISE_4M = FidelityConfig(
+    name="geo_noise_4m", position_noise_std=4.0, description="Geometry: add 4m Gaussian noise", tags=["geometry"]
+)
+
 GEO_NOISE_5M = FidelityConfig(
     name="geo_noise_5m",
     position_noise_std=5.0,
     description="Geometry: add 5m Gaussian noise to building positions",
     tags=["geometry"],
+)
+
+GEO_NOISE_7M = FidelityConfig(
+    name="geo_noise_7m", position_noise_std=7.0, description="Geometry: add 7m Gaussian noise", tags=["geometry"]
 )
 
 GEO_NOISE_10M = FidelityConfig(
@@ -179,6 +203,14 @@ RT_DEPTH_3 = FidelityConfig(
     tags=["ray_tracing"],
 )
 
+RT_500K_RAYS = FidelityConfig(
+    name="rt_500k_rays", n_samples_per_src=500_000, description="Ray Tracing: 500K rays", tags=["ray_tracing"]
+)
+
+RT_200K_RAYS = FidelityConfig(
+    name="rt_200k_rays", n_samples_per_src=200_000, description="Ray Tracing: 200K rays", tags=["ray_tracing"]
+)
+
 RT_LOW_RAYS = FidelityConfig(
     name="rt_low_rays",
     n_samples_per_src=100_000,
@@ -186,11 +218,27 @@ RT_LOW_RAYS = FidelityConfig(
     tags=["ray_tracing"],
 )
 
+RT_50K_RAYS = FidelityConfig(
+    name="rt_50k_rays", n_samples_per_src=50_000, description="Ray Tracing: 50K rays", tags=["ray_tracing"]
+)
+
+RT_20K_RAYS = FidelityConfig(
+    name="rt_20k_rays", n_samples_per_src=20_000, description="Ray Tracing: 20K rays", tags=["ray_tracing"]
+)
+
 RT_VERY_LOW_RAYS = FidelityConfig(
     name="rt_very_low_rays",
     n_samples_per_src=10_000,
     description="Ray Tracing: 10K rays (100x fewer than baseline)",
     tags=["ray_tracing"],
+)
+
+RT_5K_RAYS = FidelityConfig(
+    name="rt_5k_rays", n_samples_per_src=5_000, description="Ray Tracing: 5K rays", tags=["ray_tracing"]
+)
+
+RT_1K_RAYS = FidelityConfig(
+    name="rt_1k_rays", n_samples_per_src=1_000, description="Ray Tracing: 1K rays", tags=["ray_tracing"]
 )
 
 RT_WITH_DIFFRACTION = FidelityConfig(
@@ -228,8 +276,14 @@ HW_4X4_ARRAY = FidelityConfig(
 ALL_CONFIGS: list[FidelityConfig] = [
     BASELINE,
     # Geometry
+    GEO_NOISE_0_1M,
+    GEO_NOISE_0_5M,
     GEO_NOISE_1M,
+    GEO_NOISE_2M,
+    GEO_NOISE_3M,
+    GEO_NOISE_4M,
     GEO_NOISE_5M,
+    GEO_NOISE_7M,
     GEO_NOISE_10M,
     GEO_HEIGHT_NOISE_3M,
     GEO_REMOVE_SMALL,
@@ -240,8 +294,14 @@ ALL_CONFIGS: list[FidelityConfig] = [
     # Ray Tracing
     RT_DEPTH_1,
     RT_DEPTH_3,
+    RT_500K_RAYS,
+    RT_200K_RAYS,
     RT_LOW_RAYS,
+    RT_50K_RAYS,
+    RT_20K_RAYS,
     RT_VERY_LOW_RAYS,
+    RT_5K_RAYS,
+    RT_1K_RAYS,
     RT_WITH_DIFFRACTION,
     # Hardware
     HW_DIPOLE,

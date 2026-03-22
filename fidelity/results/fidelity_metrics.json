@@ -1,0 +1,402 @@
+{
+  "geo_noise_1m": {
+    "config_name": "geo_noise_1m",
+    "unified_fidelity_score": 0.4590782463126215,
+    "geometry": {
+      "blockage_error_rate": 0.027210884353741496,
+      "toa_rmse_ns": 13.994432279673674,
+      "score": 0.8366528016331064
+    },
+    "material": {
+      "nlos_power_rmse_dB": 144.22080993652344,
+      "score": 0.0
+    },
+    "ray_tracing": {
+      "path_count_ratio": 1.0075559430398142,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 7.861678004535148,
+      "global_energy_deviation_dB": 0.013592655304819345,
+      "score": 0.9996601836173795
+    },
+    "hardware": {
+      "channel_nmse_linear": 11.563259654661243,
+      "channel_nmse_dB": 10.630802778976065,
+      "score": 0.0
+    }
+  },
+  "geo_noise_5m": {
+    "config_name": "geo_noise_5m",
+    "unified_fidelity_score": 0.4017578541733863,
+    "geometry": {
+      "blockage_error_rate": 0.15419501133786848,
+      "toa_rmse_ns": 27.075827802036656,
+      "score": 0.6167962863909371
+    },
+    "material": {
+      "nlos_power_rmse_dB": 148.64683532714844,
+      "score": 0.0
+    },
+    "ray_tracing": {
+      "path_count_ratio": 1.2266782911944203,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 9.571428571428571,
+      "global_energy_deviation_dB": 0.3905947878956795,
+      "score": 0.990235130302608
+    },
+    "hardware": {
+      "channel_nmse_linear": 15.65110219733797,
+      "channel_nmse_dB": 11.945449272732967,
+      "score": 0.0
+    }
+  },
+  "geo_noise_10m": {
+    "config_name": "geo_noise_10m",
+    "unified_fidelity_score": 0.36564718531504775,
+    "geometry": {
+      "blockage_error_rate": 0.29931972789115646,
+      "toa_rmse_ns": 31.90972819311355,
+      "score": 0.47709510177614317
+    },
+    "material": {
+      "nlos_power_rmse_dB": 146.73422241210938,
+      "score": 0.0
+    },
+    "ray_tracing": {
+      "path_count_ratio": 1.1575123510607381,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 9.031746031746032,
+      "global_energy_deviation_dB": 0.5802544206380844,
+      "score": 0.9854936394840479
+    },
+    "hardware": {
+      "channel_nmse_linear": 213.86359804907275,
+      "channel_nmse_dB": 23.301368691353925,
+      "score": 0.0
+    }
+  },
+  "geo_height_noise_3m": {
+    "config_name": "geo_height_noise_3m",
+    "unified_fidelity_score": 0.6320294345194618,
+    "geometry": {
+      "blockage_error_rate": 0.30612244897959184,
+      "toa_rmse_ns": 18.903486775911915,
+      "score": 0.5627104999222439
+    },
+    "material": {
+      "nlos_power_rmse_dB": 0.46238189935684204,
+      "score": 0.9768809050321579
+    },
+    "ray_tracing": {
+      "path_count_ratio": 1.3458297006684103,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 10.501133786848072,
+      "global_energy_deviation_dB": 0.45894667506217957,
+      "score": 0.9885263331234455
+    },
+    "hardware": {
+      "channel_nmse_linear": 5.770920230515398,
+      "channel_nmse_dB": 7.612450712439568,
+      "score": 0.0
+    }
+  },
+  "geo_remove_small": {
+    "config_name": "geo_remove_small",
+    "unified_fidelity_score": 0.999767255491649,
+    "geometry": {
+      "blockage_error_rate": 0.0,
+      "toa_rmse_ns": 0.03301426146351538,
+      "score": 0.9996698573853648
+    },
+    "material": {
+      "nlos_power_rmse_dB": 0.0,
+      "score": 1.0
+    },
+    "ray_tracing": {
+      "path_count_ratio": 0.9991281604184831,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 7.795918367346939,
+      "global_energy_deviation_dB": -0.0003751038821064867,
+      "score": 0.9995547026121889
+    },
+    "hardware": {
+      "channel_nmse_linear": 0.00015553803095775878,
+      "channel_nmse_dB": -38.08163403320928,
+      "score": 0.9998444619690422
+    }
+  },
+  "geo_remove_30pct": {
+    "config_name": "geo_remove_30pct",
+    "unified_fidelity_score": 0.9998917150441914,
+    "geometry": {
+      "blockage_error_rate": 0.0,
+      "toa_rmse_ns": 0.03273465526421049,
+      "score": 0.9996726534473579
+    },
+    "material": {
+      "nlos_power_rmse_dB": 0.0,
+      "score": 1.0
+    },
+    "ray_tracing": {
+      "path_count_ratio": 1.000581226387678,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 7.807256235827665,
+      "global_energy_deviation_dB": 5.177193074246134e-07,
+      "score": 0.9999999870570173
+    },
+    "hardware": {
+      "channel_nmse_linear": 0.00010578032760967358,
+      "channel_nmse_dB": -39.755950922721006,
+      "score": 0.9998942196723903
+    }
+  },
+  "mat_all_concrete": {
+    "config_name": "mat_all_concrete",
+    "unified_fidelity_score": 0.883919453600705,
+    "geometry": {
+      "blockage_error_rate": 0.0,
+      "toa_rmse_ns": 3.7674561248479677,
+      "score": 0.9623254387515203
+    },
+    "material": {
+      "nlos_power_rmse_dB": 3.8483729362487793,
+      "score": 0.8075813531875611
+    },
+    "ray_tracing": {
+      "path_count_ratio": 1.001162452775356,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 7.811791383219955,
+      "global_energy_deviation_dB": 0.00115487833681982,
+      "score": 0.9999711280415795
+    },
+    "hardware": {
+      "channel_nmse_linear": 0.23420010557784054,
+      "channel_nmse_dB": -6.304129134828562,
+      "score": 0.7657998944221595
+    }
+  },
+  "mat_no_scattering": {
+    "config_name": "mat_no_scattering",
+    "unified_fidelity_score": 0.9996728569418565,
+    "geometry": {
+      "blockage_error_rate": 0.0,
+      "toa_rmse_ns": 0.033620776301868105,
+      "score": 0.9996637922369813
+    },
+    "material": {
+      "nlos_power_rmse_dB": 0.0,
+      "score": 1.0
+    },
+    "ray_tracing": {
+      "path_count_ratio": 0.998256320836966,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 7.789115646258503,
+      "global_energy_deviation_dB": -7.869405635574367e-05,
+      "score": 0.9991261930670741
+    },
+    "hardware": {
+      "channel_nmse_linear": 9.855753662944703e-05,
+      "channel_nmse_dB": -40.063101599037545,
+      "score": 0.9999014424633705
+    }
+  },
+  "rt_depth_1": {
+    "config_name": "rt_depth_1",
+    "unified_fidelity_score": 0.6029330970909547,
+    "geometry": {
+      "blockage_error_rate": 0.034013605442176874,
+      "toa_rmse_ns": 3.4102001222890976,
+      "score": 0.9330443253493161
+    },
+    "material": {
+      "nlos_power_rmse_dB": 144.22178649902344,
+      "score": 0.0
+    },
+    "ray_tracing": {
+      "path_count_ratio": 0.22929380993897125,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 1.7891156462585034,
+      "global_energy_deviation_dB": -0.055231861770153046,
+      "score": 0.6132661084252318
+    },
+    "hardware": {
+      "channel_nmse_linear": 0.1345780454107293,
+      "channel_nmse_dB": -8.710257836088012,
+      "score": 0.8654219545892707
+    }
+  },
+  "rt_depth_3": {
+    "config_name": "rt_depth_3",
+    "unified_fidelity_score": 0.6864659572958973,
+    "geometry": {
+      "blockage_error_rate": 0.011337868480725623,
+      "toa_rmse_ns": 1.3825965927694028,
+      "score": 0.9749929225748876
+    },
+    "material": {
+      "nlos_power_rmse_dB": 144.22064208984375,
+      "score": 0.0
+    },
+    "ray_tracing": {
+      "path_count_ratio": 0.6495204882301656,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 5.068027210884353,
+      "global_energy_deviation_dB": -0.0011650248779915273,
+      "score": 0.824731118493133
+    },
+    "hardware": {
+      "channel_nmse_linear": 0.0538602118844311,
+      "channel_nmse_dB": -12.687319424198996,
+      "score": 0.9461397881155689
+    }
+  },
+  "rt_low_rays": {
+    "config_name": "rt_low_rays",
+    "unified_fidelity_score": 0.9998980947524488,
+    "geometry": {
+      "blockage_error_rate": 0.0,
+      "toa_rmse_ns": 0.032640098956981944,
+      "score": 0.9996735990104302
+    },
+    "material": {
+      "nlos_power_rmse_dB": 0.0,
+      "score": 1.0
+    },
+    "ray_tracing": {
+      "path_count_ratio": 1.000871839581517,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 7.809523809523809,
+      "global_energy_deviation_dB": 3.6240339795767795e-06,
+      "score": 0.9999999093991505
+    },
+    "hardware": {
+      "channel_nmse_linear": 8.11293997852815e-05,
+      "channel_nmse_dB": -40.908217370247904,
+      "score": 0.9999188706002147
+    }
+  },
+  "rt_very_low_rays": {
+    "config_name": "rt_very_low_rays",
+    "unified_fidelity_score": 0.9989906112908988,
+    "geometry": {
+      "blockage_error_rate": 0.0,
+      "toa_rmse_ns": 0.33582467362514024,
+      "score": 0.9966417532637486
+    },
+    "material": {
+      "nlos_power_rmse_dB": 3.0283124942798167e-05,
+      "score": 0.9999984858437528
+    },
+    "ray_tracing": {
+      "path_count_ratio": 0.999418773612322,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 7.798185941043084,
+      "global_energy_deviation_dB": 2.588595862107468e-06,
+      "score": 0.9997093220912645
+    },
+    "hardware": {
+      "channel_nmse_linear": 0.00038711603517063443,
+      "channel_nmse_dB": -34.12158838906079,
+      "score": 0.9996128839648294
+    }
+  },
+  "rt_with_diffraction": {
+    "config_name": "rt_with_diffraction",
+    "unified_fidelity_score": 0.9998982200029557,
+    "geometry": {
+      "blockage_error_rate": 0.0,
+      "toa_rmse_ns": 0.032641469388527966,
+      "score": 0.9996735853061147
+    },
+    "material": {
+      "nlos_power_rmse_dB": 0.0,
+      "score": 1.0
+    },
+    "ray_tracing": {
+      "path_count_ratio": 1.000871839581517,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 7.809523809523809,
+      "global_energy_deviation_dB": 3.1063149208421237e-06,
+      "score": 0.999999922342127
+    },
+    "hardware": {
+      "channel_nmse_linear": 8.062763641889317e-05,
+      "channel_nmse_dB": -40.9351607125953,
+      "score": 0.9999193723635811
+    }
+  },
+  "hw_dipole": {
+    "config_name": "hw_dipole",
+    "unified_fidelity_score": 0.8824993275414126,
+    "geometry": {
+      "blockage_error_rate": 0.02040816326530612,
+      "toa_rmse_ns": 10.817634787940733,
+      "score": 0.873623169424254
+    },
+    "material": {
+      "nlos_power_rmse_dB": 3.3592751026153564,
+      "score": 0.8320362448692322
+    },
+    "ray_tracing": {
+      "path_count_ratio": 1.000871839581517,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 7.809523809523809,
+      "global_energy_deviation_dB": -0.8541552722454071,
+      "score": 0.9786461181938648
+    },
+    "hardware": {
+      "channel_nmse_linear": 0.15430822232170097,
+      "channel_nmse_dB": -8.116109319160907,
+      "score": 0.8456917776782991
+    }
+  },
+  "hw_tr38901": {
+    "config_name": "hw_tr38901",
+    "unified_fidelity_score": 0.36046333790772833,
+    "geometry": {
+      "blockage_error_rate": 0.39909297052154197,
+      "toa_rmse_ns": 67.04529909029588,
+      "score": 0.19802711431001338
+    },
+    "material": {
+      "nlos_power_rmse_dB": 10.204325675964355,
+      "score": 0.4897837162017822
+    },
+    "ray_tracing": {
+      "path_count_ratio": 1.001162452775356,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 7.811791383219955,
+      "global_energy_deviation_dB": -9.83829915523529,
+      "score": 0.7540425211191177
+    },
+    "hardware": {
+      "channel_nmse_linear": 4.506856583295702,
+      "channel_nmse_dB": 6.5387373821868255,
+      "score": 0.0
+    }
+  },
+  "hw_4x4_array": {
+    "config_name": "hw_4x4_array",
+    "unified_fidelity_score": 0.7496550141367705,
+    "geometry": {
+      "blockage_error_rate": 0.0,
+      "toa_rmse_ns": 0.03625707720167348,
+      "score": 0.9996374292279833
+    },
+    "material": {
+      "nlos_power_rmse_dB": 0.0,
+      "score": 1.0
+    },
+    "ray_tracing": {
+      "path_count_ratio": 0.997965707643127,
+      "mean_paths_baseline": 7.802721088435374,
+      "mean_paths_degraded": 7.786848072562358,
+      "global_energy_deviation_dB": -9.060098591362475e-06,
+      "score": 0.9989826273190987
+    },
+    "hardware": {
+      "channel_nmse_linear": 1.5517065999297415,
+      "channel_nmse_dB": 1.9080960733624053,
+      "score": 0.0
+    }
+  }
+}

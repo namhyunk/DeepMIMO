@@ -1,0 +1,32 @@
+{
+  "config_name": "geo_noise_10m",
+  "description": "Geometry: add 10m Gaussian noise to building positions",
+  "tags": [
+    "geometry"
+  ],
+  "rt_params": {
+    "max_reflections": 5,
+    "max_diffractions": 0,
+    "ds_enable": false,
+    "n_samples_per_src": 1000000,
+    "los": true
+  },
+  "geometry": {
+    "position_noise_std": 10.0,
+    "height_noise_std": 0.0,
+    "remove_buildings_below": 0.0,
+    "remove_buildings_fraction": 0.0
+  },
+  "material": {
+    "uniform_material": null,
+    "disable_scattering": false
+  },
+  "hardware": {
+    "antenna_pattern": "iso",
+    "tx_array": "1x1",
+    "rx_array": "1x1"
+  },
+  "runtime_seconds": 7.433814764022827,
+  "scenario_name": "geo_noise_10m",
+  "scene_folder": ""
+}

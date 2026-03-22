@@ -61,7 +61,7 @@ def sionna_rt_converter(  # noqa: PLR0913
     print("converting from sionna RT")
 
     # Get scenario name from folder if not provided
-    rt_folder = rt_folder[:-1] if rt_folder[-1] in ["/", "\\"] else rt_folder
+    rt_folder = rt_folder[:-1] if rt_folder and rt_folder[-1] in ["/", "\\"] else rt_folder
     scen_name = scenario_name if scenario_name else Path(rt_folder).name.lower()
 
     # Check if scenario already exists in the scenarios folder

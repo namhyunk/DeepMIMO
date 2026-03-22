@@ -1,0 +1,502 @@
+==== 1. Baseline ====
+TX positions: 1 stations
+RX positions: 441 users
+
+############################################################
+  FIDELITY EXPERIMENT
+  Configs: 1
+  Scene: 
+  Output: /home/namhyunk/nokia/DeepMIMO/fidelity/results
+############################################################
+
+
+[1/1] 
+============================================================
+  Running: baseline
+  Description: Full fidelity: 5 reflections, 1M rays, real materials, iso antenna
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ baseline completed in 4.8s
+  ✓ Scenario: baseline
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/baseline/metadata.json
+
+############################################################
+  EXPERIMENT COMPLETE
+  Results: 1/1 succeeded
+  Summary: /home/namhyunk/nokia/DeepMIMO/fidelity/results/experiment_summary.json
+############################################################
+
+==== 2. Geometry ====
+TX positions: 1 stations
+RX positions: 441 users
+
+############################################################
+  FIDELITY EXPERIMENT
+  Configs: 7
+  Scene: 
+  Output: /home/namhyunk/nokia/DeepMIMO/fidelity/results
+############################################################
+
+
+[1/7] 
+============================================================
+  Running: baseline
+  Description: Full fidelity: 5 reflections, 1M rays, real materials, iso antenna
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ baseline completed in 2.8s
+  ✓ Scenario: baseline
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/baseline/metadata.json
+
+[2/7] 
+============================================================
+  Running: geo_noise_1m
+  Description: Geometry: add 1m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=1.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_noise_1m completed in 5.3s
+  ✓ Scenario: geo_noise_1m
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_noise_1m/metadata.json
+
+[3/7] 
+============================================================
+  Running: geo_noise_5m
+  Description: Geometry: add 5m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=5.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_noise_5m completed in 5.7s
+  ✓ Scenario: geo_noise_5m
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_noise_5m/metadata.json
+
+[4/7] 
+============================================================
+  Running: geo_noise_10m
+  Description: Geometry: add 10m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=10.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_noise_10m completed in 6.9s
+  ✓ Scenario: geo_noise_10m
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_noise_10m/metadata.json
+
+[5/7] 
+============================================================
+  Running: geo_height_noise_3m
+  Description: Geometry: add 3m noise to building heights
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding height noise σ=3.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_height_noise_3m completed in 8.4s
+  ✓ Scenario: geo_height_noise_3m
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_height_noise_3m/metadata.json
+
+[6/7] 
+============================================================
+  Running: geo_remove_small
+  Description: Geometry: remove buildings shorter than 5m
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Removing buildings below 5.0m
+[scene_editor] Removed 0 buildings below 5.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_remove_small completed in 9.9s
+  ✓ Scenario: geo_remove_small
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_remove_small/metadata.json
+
+[7/7] 
+============================================================
+  Running: geo_remove_30pct
+  Description: Geometry: randomly remove 30% of buildings
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Removing 30% of buildings
+[scene_editor] Randomly removed 1/6 buildings (30%)
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_remove_30pct completed in 11.1s
+  ✓ Scenario: geo_remove_30pct
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_remove_30pct/metadata.json
+
+############################################################
+  EXPERIMENT COMPLETE
+  Results: 7/7 succeeded
+  Summary: /home/namhyunk/nokia/DeepMIMO/fidelity/results/experiment_summary.json
+############################################################
+
+==== 3. All ====
+TX positions: 1 stations
+RX positions: 441 users
+
+############################################################
+  FIDELITY EXPERIMENT
+  Configs: 17
+  Scene: 
+  Output: /home/namhyunk/nokia/DeepMIMO/fidelity/results
+############################################################
+
+
+[1/17] 
+============================================================
+  Running: baseline
+  Description: Full fidelity: 5 reflections, 1M rays, real materials, iso antenna
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ baseline completed in 3.0s
+  ✓ Scenario: baseline
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/baseline/metadata.json
+
+[2/17] 
+============================================================
+  Running: geo_noise_1m
+  Description: Geometry: add 1m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=1.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_noise_1m completed in 4.2s
+  ✓ Scenario: geo_noise_1m
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_noise_1m/metadata.json
+
+[3/17] 
+============================================================
+  Running: geo_noise_5m
+  Description: Geometry: add 5m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=5.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_noise_5m completed in 5.4s
+  ✓ Scenario: geo_noise_5m
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_noise_5m/metadata.json
+
+[4/17] 
+============================================================
+  Running: geo_noise_10m
+  Description: Geometry: add 10m Gaussian noise to building positions
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding position noise σ=10.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_noise_10m completed in 7.4s
+  ✓ Scenario: geo_noise_10m
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_noise_10m/metadata.json
+
+[5/17] 
+============================================================
+  Running: geo_height_noise_3m
+  Description: Geometry: add 3m noise to building heights
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Adding height noise σ=3.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_height_noise_3m completed in 8.9s
+  ✓ Scenario: geo_height_noise_3m
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_height_noise_3m/metadata.json
+
+[6/17] 
+============================================================
+  Running: geo_remove_small
+  Description: Geometry: remove buildings shorter than 5m
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Removing buildings below 5.0m
+[scene_editor] Removed 0 buildings below 5.0m
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_remove_small completed in 10.0s
+  ✓ Scenario: geo_remove_small
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_remove_small/metadata.json
+
+[7/17] 
+============================================================
+  Running: geo_remove_30pct
+  Description: Geometry: randomly remove 30% of buildings
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[scene_editor] Removing 30% of buildings
+[scene_editor] Randomly removed 1/6 buildings (30%)
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ geo_remove_30pct completed in 11.3s
+  ✓ Scenario: geo_remove_30pct
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/geo_remove_30pct/metadata.json
+
+[8/17] 
+============================================================
+  Running: mat_all_concrete
+  Description: Material: all buildings set to ITU concrete
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[material_editor] Setting all materials to 'itu_concrete'
+[material_editor] Set 6 objects to material 'itu_concrete'
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ mat_all_concrete completed in 12.4s
+  ✓ Scenario: mat_all_concrete
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/mat_all_concrete/metadata.json
+
+[9/17] 
+============================================================
+  Running: mat_no_scattering
+  Description: Material: disable scattering for all materials
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[material_editor] Disabling scattering for all materials
+[material_editor] Disabled scattering for 5 materials
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ mat_no_scattering completed in 16.9s
+  ✓ Scenario: mat_no_scattering
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/mat_no_scattering/metadata.json
+
+[10/17] 
+============================================================
+  Running: rt_depth_1
+  Description: Ray Tracing: max 1 reflection
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ rt_depth_1 completed in 18.5s
+  ✓ Scenario: rt_depth_1
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/rt_depth_1/metadata.json
+
+[11/17] 
+============================================================
+  Running: rt_depth_3
+  Description: Ray Tracing: max 3 reflections
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ rt_depth_3 completed in 21.5s
+  ✓ Scenario: rt_depth_3
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/rt_depth_3/metadata.json
+
+[12/17] 
+============================================================
+  Running: rt_low_rays
+  Description: Ray Tracing: 100K rays (10x fewer than baseline)
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ rt_low_rays completed in 22.4s
+  ✓ Scenario: rt_low_rays
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/rt_low_rays/metadata.json
+
+[13/17] 
+============================================================
+  Running: rt_very_low_rays
+  Description: Ray Tracing: 10K rays (100x fewer than baseline)
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ rt_very_low_rays completed in 24.3s
+  ✓ Scenario: rt_very_low_rays
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/rt_very_low_rays/metadata.json
+
+[14/17] 
+============================================================
+  Running: rt_with_diffraction
+  Description: Ray Tracing: enable 1 diffraction event
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ rt_with_diffraction completed in 25.8s
+  ✓ Scenario: rt_with_diffraction
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/rt_with_diffraction/metadata.json
+
+[15/17] 
+============================================================
+  Running: hw_dipole
+  Description: Hardware: half-wave dipole antenna pattern
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[hw_editor] Set antenna: pattern=dipole, TX=1x1, RX=1x1
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ hw_dipole completed in 28.0s
+  ✓ Scenario: hw_dipole
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/hw_dipole/metadata.json
+
+[16/17] 
+============================================================
+  Running: hw_tr38901
+  Description: Hardware: 3GPP TR 38.901 antenna pattern
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[hw_editor] Set antenna: pattern=tr38901, TX=1x1, RX=1x1
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ hw_tr38901 completed in 29.0s
+  ✓ Scenario: hw_tr38901
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/hw_tr38901/metadata.json
+
+[17/17] 
+============================================================
+  Running: hw_4x4_array
+  Description: Hardware: 4x4 UPA at TX
+============================================================
+
+XML scene path: /home/namhyunk/miniforge3/envs/lwm/lib/python3.11/site-packages/sionna/rt/scenes/simple_street_canyon/simple_street_canyon.xml
+[hw_editor] Set antenna: pattern=iso, TX=4x4, RX=1x1
+Added BS_0 at position [20. 20. 10.]
+Saving Sionna outputs
+Determining converter...
+Using Sionna RT converter
+converting from sionna RT
+
+  ✓ hw_4x4_array completed in 30.2s
+  ✓ Scenario: hw_4x4_array
+  ✓ Metadata: /home/namhyunk/nokia/DeepMIMO/fidelity/results/hw_4x4_array/metadata.json
+
+############################################################
+  EXPERIMENT COMPLETE
+  Results: 17/17 succeeded
+  Summary: /home/namhyunk/nokia/DeepMIMO/fidelity/results/experiment_summary.json
+############################################################
+

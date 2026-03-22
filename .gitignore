@@ -58,6 +58,7 @@ ai-ran/*
 # Documentation
 docs/_build/
 docs/api/_autosummary/
+fidelity/docs/
 docs/manual_full.ipynb
 
 # Gitignore Defaults

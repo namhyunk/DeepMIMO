@@ -39,7 +39,7 @@ def is_sionna_v1() -> bool:
             "[DeepMIMO] Warning: Could not determine Sionna version. Assuming Sionna RT >= 1.0.0.",
         )
         return True
-    return sionna_version.startswith("1.")
+    return sionna_version.startswith("1.") or sionna_version.startswith("2.")
 
 
 def set_materials(scene: Scene) -> Scene:

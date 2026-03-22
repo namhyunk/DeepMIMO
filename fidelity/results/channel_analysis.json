@@ -1,0 +1,31 @@
+{
+  "geo_noise_5m": {
+    "baseline": "baseline",
+    "degraded": "geo_noise_5m",
+    "n_ue_baseline": 441,
+    "n_ue_degraded": 441,
+    "los": {
+      "los_accuracy": 0.9206349206349206,
+      "los_false_positive_rate": 0.04308390022675737,
+      "los_false_negative_rate": 0.036281179138321996,
+      "baseline_los_fraction": 0.8752834467120182,
+      "degraded_los_fraction": 0.8820861678004536,
+      "n_samples": 441
+    },
+    "path_loss": {
+      "path_loss_rmse_dB": 0.0,
+      "path_loss_mae_dB": 0.0,
+      "path_loss_bias_dB": 0.0,
+      "path_loss_correlation": NaN
+    },
+    "channel_nmse": {
+      "channel_nmse_linear": 15.65110219733797,
+      "channel_nmse_dB": 11.945449272732967,
+      "channel_nmse_median_dB": -9.496350900787238
+    },
+    "delay_spread": {
+      "delay_spread_rmse_ns": NaN,
+      "delay_spread_correlation": NaN
+    }
+  }
+}
