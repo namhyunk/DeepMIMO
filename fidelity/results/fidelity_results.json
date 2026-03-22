@@ -1,0 +1,132 @@
+{
+  "baseline": {
+    "config_name": "baseline",
+    "description": "Full fidelity: 5 reflections, 1M rays, iso antenna",
+    "max_depth": 5,
+    "samples_per_src": 1000000,
+    "runtime_seconds": 1.67,
+    "a_shape": [
+      2,
+      81,
+      1,
+      1,
+      1,
+      20
+    ],
+    "tau_shape": [
+      81,
+      1,
+      20
+    ],
+    "mean_total_power": 5.032750038935774e-08,
+    "mean_total_power_dB": -72.98194885253906,
+    "mean_significant_paths": 7.160493827160494,
+    "mean_delay_s": -0.6271604299545288,
+    "max_delay_s": 3.8017518022570584e-07,
+    "status": "success"
+  },
+  "rt_depth_1": {
+    "config_name": "rt_depth_1",
+    "description": "RT: max 1 reflection",
+    "max_depth": 1,
+    "samples_per_src": 1000000,
+    "runtime_seconds": 1.8,
+    "a_shape": [
+      2,
+      162,
+      1,
+      1,
+      1,
+      4
+    ],
+    "tau_shape": [
+      162,
+      1,
+      4
+    ],
+    "mean_total_power": 5.0225384740087975e-08,
+    "mean_total_power_dB": -72.99076843261719,
+    "mean_significant_paths": 1.4382716049382716,
+    "mean_delay_s": -0.5925925970077515,
+    "max_delay_s": 1.658293768969088e-07,
+    "status": "success"
+  },
+  "rt_depth_3": {
+    "config_name": "rt_depth_3",
+    "description": "RT: max 3 reflections",
+    "max_depth": 3,
+    "samples_per_src": 1000000,
+    "runtime_seconds": 3.83,
+    "a_shape": [
+      2,
+      243,
+      1,
+      1,
+      1,
+      12
+    ],
+    "tau_shape": [
+      243,
+      1,
+      12
+    ],
+    "mean_total_power": 5.0326587341942286e-08,
+    "mean_total_power_dB": -72.98202514648438,
+    "mean_significant_paths": 4.637860082304527,
+    "mean_delay_s": -0.5929355025291443,
+    "max_delay_s": 2.62106937043427e-07,
+    "status": "success"
+  },
+  "rt_low_rays": {
+    "config_name": "rt_low_rays",
+    "description": "RT: 100K rays (10x fewer)",
+    "max_depth": 5,
+    "samples_per_src": 100000,
+    "runtime_seconds": 1.66,
+    "a_shape": [
+      2,
+      324,
+      1,
+      1,
+      1,
+      20
+    ],
+    "tau_shape": [
+      324,
+      1,
+      20
+    ],
+    "mean_total_power": 5.0327450651366235e-08,
+    "mean_total_power_dB": -72.9819564819336,
+    "mean_significant_paths": 7.111111111111111,
+    "mean_delay_s": -0.6296296119689941,
+    "max_delay_s": 3.8017518022570584e-07,
+    "status": "success"
+  },
+  "rt_very_low_rays": {
+    "config_name": "rt_very_low_rays",
+    "description": "RT: 10K rays (100x fewer)",
+    "max_depth": 5,
+    "samples_per_src": 10000,
+    "runtime_seconds": 1.24,
+    "a_shape": [
+      2,
+      405,
+      1,
+      1,
+      1,
+      16
+    ],
+    "tau_shape": [
+      405,
+      1,
+      16
+    ],
+    "mean_total_power": 5.031499838992204e-08,
+    "mean_total_power_dB": -72.98302459716797,
+    "mean_significant_paths": 5.293827160493827,
+    "mean_delay_s": -0.6540123224258423,
+    "max_delay_s": 3.8017518022570584e-07,
+    "status": "success"
+  }
+}
