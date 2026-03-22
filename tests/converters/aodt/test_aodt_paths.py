@@ -102,3 +102,136 @@ def test_read_paths(mock_save_mat, mock_mkdir, mock_exists, mock_pd) -> None:
     # Verify save_mat called
     assert mock_save_mat.called
     mock_mkdir.assert_called()
+
+
+@patch("deepmimo.converters.aodt.aodt_paths.pd")
+@patch.object(Path, "exists")
+@patch("pathlib.Path.mkdir")
+@patch("deepmimo.converters.aodt.aodt_paths.gu.save_mat")
+def test_read_paths_multi_tx_antennas(mock_save_mat, mock_mkdir, mock_exists, mock_pd) -> None:
+    """Multi-TX-antenna AODT output writes multiple tx_idx files (Sionna-style)."""
+    mock_exists.return_value = True
+
+    class MockPathRow:
+        def __init__(self) -> None:
+            self.points = np.array([[0, 0, 0], [100, 0, 0], [200, 0, 0]])  # cm
+            self.interaction_types = np.array(["emission", "reflection", "reception"], dtype=object)
+
+    mock_paths_df = MagicMock()
+    mock_paths_df.__len__.return_value = 1
+    mock_paths_df.__getitem__.return_value = mock_paths_df
+    mock_paths_df.unique.side_effect = lambda: np.array([0])
+    mock_paths_df.itertuples.return_value = [MockPathRow()]
+
+    mock_cirs_df = MagicMock()
+    mock_cirs_df.__len__.return_value = 1
+    mock_cirs_df.__getitem__.return_value = mock_cirs_df
+    mock_cirs_df.unique.side_effect = lambda: np.array([0])
+    mock_cirs_df.iloc.__getitem__.return_value = mock_cirs_df
+
+    def cir_col_access(key):
+        if isinstance(key, str):
+            if key == "ru_ant_el":
+                m = MagicMock()
+                m.unique.return_value = np.array([0, 1])
+                return m
+            if key == "ue_ant_el":
+                m = MagicMock()
+                m.unique.return_value = np.array([0])
+                return m
+            if key in ["cir_re", "cir_im", "cir_delay"]:
+                m = MagicMock()
+                m.to_numpy.return_value = np.array([[1.0]])
+                return m
+        return mock_cirs_df
+
+    mock_cirs_df.__getitem__.side_effect = cir_col_access
+
+    def read_parquet_side_effect(path):
+        if "raypaths" in path:
+            return mock_paths_df
+        if "cirs" in path:
+            return mock_cirs_df
+        return MagicMock()
+
+    mock_pd.read_parquet.side_effect = read_parquet_side_effect
+
+    txrx_dict = {
+        "bs1": {"is_tx": True, "is_rx": False, "id_orig": 0, "id": 1, "num_ant": 1},
+        "ue1": {"is_rx": True, "is_tx": False, "id_orig": 1, "id": 2, "num_ant": 1},
+    }
+
+    aodt_paths.read_paths("rt_folder", "out_folder", txrx_dict)
+
+    # Should produce at least one save for tx_idx=0 and tx_idx=1
+    saved_paths = [args[2] for args, _kwargs in mock_save_mat.call_args_list]
+    assert any("_tx000_" in p for p in saved_paths)
+    assert any("_tx001_" in p for p in saved_paths)
+
+
+@patch("deepmimo.converters.aodt.aodt_paths.pd")
+@patch.object(Path, "exists")
+@patch("pathlib.Path.mkdir")
+@patch("deepmimo.converters.aodt.aodt_paths.gu.save_mat")
+def test_read_paths_multi_rx_antennas(mock_save_mat, mock_mkdir, mock_exists, mock_pd) -> None:
+    """Multi-RX-antenna AODT output stores UE antenna elements as RX points (Sionna-style)."""
+    mock_exists.return_value = True
+
+    class MockPathRow:
+        def __init__(self) -> None:
+            self.points = np.array([[0, 0, 0], [100, 0, 0], [200, 0, 0]])  # cm
+            self.interaction_types = np.array(["emission", "reflection", "reception"], dtype=object)
+
+    mock_paths_df = MagicMock()
+    mock_paths_df.__len__.return_value = 1
+    mock_paths_df.__getitem__.return_value = mock_paths_df
+    mock_paths_df.unique.side_effect = lambda: np.array([0])
+    mock_paths_df.itertuples.return_value = [MockPathRow()]
+
+    mock_cirs_df = MagicMock()
+    mock_cirs_df.__len__.return_value = 1
+    mock_cirs_df.__getitem__.return_value = mock_cirs_df
+    mock_cirs_df.unique.side_effect = lambda: np.array([0])
+    mock_cirs_df.iloc.__getitem__.return_value = mock_cirs_df
+
+    def cir_col_access(key):
+        if isinstance(key, str):
+            if key == "ru_ant_el":
+                m = MagicMock()
+                m.unique.return_value = np.array([0])  # single TX antenna element
+                return m
+            if key == "ue_ant_el":
+                m = MagicMock()
+                m.unique.return_value = np.array([0, 1])  # two RX antenna elements
+                return m
+            if key in ["cir_re", "cir_im", "cir_delay"]:
+                m = MagicMock()
+                m.to_numpy.return_value = np.array([[1.0]])
+                return m
+        # For boolean indexing (e.g., df[df["col"] == val]) return df-like object
+        return mock_cirs_df
+
+    mock_cirs_df.__getitem__.side_effect = cir_col_access
+
+    def read_parquet_side_effect(path):
+        if "raypaths" in path:
+            return mock_paths_df
+        if "cirs" in path:
+            return mock_cirs_df
+        return MagicMock()
+
+    mock_pd.read_parquet.side_effect = read_parquet_side_effect
+
+    txrx_dict = {
+        "bs1": {"is_tx": True, "is_rx": False, "id_orig": 0, "id": 1, "num_ant": 1},
+        "ue1": {"is_rx": True, "is_tx": False, "id_orig": 1, "id": 2, "num_ant": 2},
+    }
+
+    aodt_paths.read_paths("rt_folder", "out_folder", txrx_dict)
+
+    # RX antenna elements are represented as receiver points
+    assert txrx_dict["ue1"]["num_points"] == 2
+    assert txrx_dict["ue1"]["num_ant"] == 1
+
+    saved_paths = [args[2] for args, _kwargs in mock_save_mat.call_args_list]
+    assert any("_tx000_" in p for p in saved_paths)
