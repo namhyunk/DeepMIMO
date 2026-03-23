@@ -84,18 +84,18 @@ def build_antenna_arrays(config: FidelityConfig):
     tx_array = PlanarArray(
         num_rows=config.num_tx_ant_rows,
         num_cols=config.num_tx_ant_cols,
-        vertical_spacing=0.5,
-        horizontal_spacing=0.5,
+        vertical_spacing=config.antenna_spacing,
+        horizontal_spacing=config.antenna_spacing,
         pattern=config.antenna_pattern,
-        polarization="V",
+        polarization=config.polarization,
     )
     rx_array = PlanarArray(
         num_rows=config.num_rx_ant_rows,
         num_cols=config.num_rx_ant_cols,
-        vertical_spacing=0.5,
-        horizontal_spacing=0.5,
+        vertical_spacing=config.antenna_spacing,
+        horizontal_spacing=config.antenna_spacing,
         pattern=config.antenna_pattern,
-        polarization="V",
+        polarization=config.polarization,
     )
     return tx_array, rx_array
 

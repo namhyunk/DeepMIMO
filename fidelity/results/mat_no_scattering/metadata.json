@@ -1,13 +1,13 @@
 {
   "config_name": "mat_no_scattering",
-  "description": "Material: disable scattering for all materials",
+  "description": "Material: scattering enabled but all scattering coefficients set to 0",
   "tags": [
     "material"
   ],
   "rt_params": {
     "max_reflections": 5,
     "max_diffractions": 0,
-    "ds_enable": false,
+    "ds_enable": true,
     "n_samples_per_src": 1000000,
     "los": true
   },
@@ -26,7 +26,7 @@
     "tx_array": "1x1",
     "rx_array": "1x1"
   },
-  "runtime_seconds": 16.93230652809143,
+  "runtime_seconds": 19.714365482330322,
   "scenario_name": "mat_no_scattering",
   "scene_folder": ""
 }

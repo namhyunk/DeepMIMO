@@ -26,7 +26,7 @@
     "tx_array": "1x1",
     "rx_array": "1x1"
   },
-  "runtime_seconds": 25.832309007644653,
+  "runtime_seconds": 57.61762857437134,
   "scenario_name": "rt_with_diffraction",
   "scene_folder": ""
 }

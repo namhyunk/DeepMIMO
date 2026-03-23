@@ -1,13 +1,13 @@
 {
   "config_name": "mat_all_concrete",
-  "description": "Material: all buildings set to ITU concrete",
+  "description": "Material: all buildings set to ITU concrete (with scattering)",
   "tags": [
     "material"
   ],
   "rt_params": {
     "max_reflections": 5,
     "max_diffractions": 0,
-    "ds_enable": false,
+    "ds_enable": true,
     "n_samples_per_src": 1000000,
     "los": true
   },
@@ -26,7 +26,7 @@
     "tx_array": "1x1",
     "rx_array": "1x1"
   },
-  "runtime_seconds": 12.403502464294434,
+  "runtime_seconds": 7.441618204116821,
   "scenario_name": "mat_all_concrete",
   "scene_folder": ""
 }

@@ -46,8 +46,11 @@ class FidelityConfig:
     antenna_pattern: str = "iso"  # "iso", "dipole", "hw_dipole", "tr38901"
     num_tx_ant_rows: int = 1
     num_tx_ant_cols: int = 1
+    num_tx_ant_cols: int = 1
     num_rx_ant_rows: int = 1
     num_rx_ant_cols: int = 1
+    antenna_spacing: float = 0.5  # Wavelength spacing between elements
+    polarization: str = "V"  # "V", "H", "VH", "slant"
 
     # --- Metadata ---
     description: str = ""
@@ -172,22 +175,80 @@ GEO_REMOVE_30PCT = FidelityConfig(
 )
 
 # --- Material presets ---
+# NOTE: All material configs use ds_enable=True so that diffuse scattering
+# is active and material scattering coefficients actually matter.
+
+BASELINE_DS = FidelityConfig(
+    name="baseline_ds",
+    ds_enable=True,
+    description="Baseline with diffuse scattering enabled (reference for material experiments)",
+    tags=["material", "baseline"],
+)
 
 MAT_ALL_CONCRETE = FidelityConfig(
     name="mat_all_concrete",
     uniform_material="itu_concrete",
-    description="Material: all buildings set to ITU concrete",
+    ds_enable=True,
+    description="Material: all buildings set to ITU concrete (with scattering)",
+    tags=["material"],
+)
+
+MAT_ALL_GLASS = FidelityConfig(
+    name="mat_all_glass",
+    uniform_material="itu_glass",
+    ds_enable=True,
+    description="Material: all buildings set to ITU glass (with scattering)",
+    tags=["material"],
+)
+
+MAT_ALL_METAL = FidelityConfig(
+    name="mat_all_metal",
+    uniform_material="itu_metal",
+    ds_enable=True,
+    description="Material: all buildings set to ITU metal (with scattering)",
+    tags=["material"],
+)
+
+MAT_ALL_WOOD = FidelityConfig(
+    name="mat_all_wood",
+    uniform_material="itu_wood",
+    ds_enable=True,
+    description="Material: all buildings set to ITU wood (with scattering)",
+    tags=["material"],
+)
+
+MAT_ALL_MARBLE = FidelityConfig(
+    name="mat_all_marble",
+    uniform_material="itu_marble",
+    ds_enable=True,
+    description="Material: all buildings set to ITU marble (with scattering)",
+    tags=["material"],
+)
+
+MAT_ALL_BRICK = FidelityConfig(
+    name="mat_all_brick",
+    uniform_material="itu_brick",
+    ds_enable=True,
+    description="Material: all buildings set to ITU brick (with scattering)",
     tags=["material"],
 )
 
 MAT_NO_SCATTERING = FidelityConfig(
     name="mat_no_scattering",
     disable_scattering=True,
-    description="Material: disable scattering for all materials",
+    ds_enable=True,
+    description="Material: scattering enabled but all scattering coefficients set to 0",
     tags=["material"],
 )
 
 # --- Ray Tracing presets ---
+
+RT_DEPTH_0 = FidelityConfig(
+    name="rt_depth_0",
+    max_reflections=0,
+    description="Ray Tracing: max 0 reflections (LOS only)",
+    tags=["ray_tracing"],
+)
 
 RT_DEPTH_1 = FidelityConfig(
     name="rt_depth_1",
@@ -196,10 +257,65 @@ RT_DEPTH_1 = FidelityConfig(
     tags=["ray_tracing"],
 )
 
+RT_DEPTH_2 = FidelityConfig(
+    name="rt_depth_2",
+    max_reflections=2,
+    description="Ray Tracing: max 2 reflections",
+    tags=["ray_tracing"],
+)
+
 RT_DEPTH_3 = FidelityConfig(
     name="rt_depth_3",
     max_reflections=3,
     description="Ray Tracing: max 3 reflections",
+    tags=["ray_tracing"],
+)
+
+RT_DEPTH_4 = FidelityConfig(
+    name="rt_depth_4",
+    max_reflections=4,
+    description="Ray Tracing: max 4 reflections",
+    tags=["ray_tracing"],
+)
+RT_DEPTH_5 = FidelityConfig(
+    name="rt_depth_5",
+    max_reflections=5,
+    description="Ray Tracing: max 5 reflections",
+    tags=["ray_tracing"],
+)
+
+RT_DEPTH_6 = FidelityConfig(
+    name="rt_depth_6",
+    max_reflections=6,
+    description="Ray Tracing: max 6 reflections",
+    tags=["ray_tracing"],
+)
+
+RT_DEPTH_7 = FidelityConfig(
+    name="rt_depth_7",
+    max_reflections=7,
+    description="Ray Tracing: max 7 reflections",
+    tags=["ray_tracing"],
+)
+
+RT_DEPTH_8 = FidelityConfig(
+    name="rt_depth_8",
+    max_reflections=8,
+    description="Ray Tracing: max 8 reflections",
+    tags=["ray_tracing"],
+)
+
+RT_DEPTH_9 = FidelityConfig(
+    name="rt_depth_9",
+    max_reflections=9,
+    description="Ray Tracing: max 9 reflections",
+    tags=["ray_tracing"],
+)
+
+RT_DEPTH_10 = FidelityConfig(
+    name="rt_depth_10",
+    max_reflections=10,
+    description="Ray Tracing: max 10 reflections (New Baseline)",
     tags=["ray_tracing"],
 )
 
@@ -249,26 +365,54 @@ RT_WITH_DIFFRACTION = FidelityConfig(
 )
 
 # --- Hardware presets ---
+# To properly measure DT hardware fidelity impact on MIMO applications, we fix the
+# array size to a 4x4 UPA. The baseline uses high-fidelity 3GPP patterns, and we
+# degrade fidelity by simplifying the element pattern to dipole or isotropic.
 
-HW_DIPOLE = FidelityConfig(
-    name="hw_dipole",
-    antenna_pattern="dipole",
-    description="Hardware: half-wave dipole antenna pattern",
-    tags=["hardware"],
-)
-
-HW_TR38901 = FidelityConfig(
-    name="hw_tr38901",
-    antenna_pattern="tr38901",
-    description="Hardware: 3GPP TR 38.901 antenna pattern",
-    tags=["hardware"],
-)
-
-HW_4X4_ARRAY = FidelityConfig(
-    name="hw_4x4_array",
+HW_BASELINE_4X4 = FidelityConfig(
+    name="hw_baseline_4x4",
     num_tx_ant_rows=4,
     num_tx_ant_cols=4,
-    description="Hardware: 4x4 UPA at TX",
+    antenna_pattern="tr38901",
+    description="Hardware: 4x4 UPA with 3GPP TR38901 pattern (Hardware Baseline)",
+    tags=["hardware", "baseline"],
+)
+
+HW_4X4_DIPOLE = FidelityConfig(
+    name="hw_4x4_dipole",
+    num_tx_ant_rows=4,
+    num_tx_ant_cols=4,
+    antenna_pattern="dipole",
+    description="Hardware: 4x4 UPA simplified to Dipole elements",
+    tags=["hardware"],
+)
+
+HW_4X4_ISO = FidelityConfig(
+    name="hw_4x4_iso",
+    num_tx_ant_rows=4,
+    num_tx_ant_cols=4,
+    antenna_pattern="iso",
+    description="Hardware: 4x4 UPA simplified to Isotropic elements",
+    tags=["hardware"],
+)
+
+HW_4X4_SPACING_04 = FidelityConfig(
+    name="hw_4x4_spacing04",
+    num_tx_ant_rows=4,
+    num_tx_ant_cols=4,
+    antenna_pattern="tr38901",
+    antenna_spacing=0.4,
+    description="Hardware: 4x4 UPA with spacing error (0.4 vs 0.5)",
+    tags=["hardware"],
+)
+
+HW_4X4_POL_H = FidelityConfig(
+    name="hw_4x4_polh",
+    num_tx_ant_rows=4,
+    num_tx_ant_cols=4,
+    antenna_pattern="tr38901",
+    polarization="H",
+    description="Hardware: 4x4 UPA with polarization error (H vs V)",
     tags=["hardware"],
 )
 
@@ -289,11 +433,26 @@ ALL_CONFIGS: list[FidelityConfig] = [
     GEO_REMOVE_SMALL,
     GEO_REMOVE_30PCT,
     # Material
+    BASELINE_DS,
     MAT_ALL_CONCRETE,
+    MAT_ALL_GLASS,
+    MAT_ALL_METAL,
+    MAT_ALL_WOOD,
+    MAT_ALL_MARBLE,
+    MAT_ALL_BRICK,
     MAT_NO_SCATTERING,
     # Ray Tracing
+    RT_DEPTH_0,
     RT_DEPTH_1,
+    RT_DEPTH_2,
     RT_DEPTH_3,
+    RT_DEPTH_4,
+    RT_DEPTH_5,
+    RT_DEPTH_6,
+    RT_DEPTH_7,
+    RT_DEPTH_8,
+    RT_DEPTH_9,
+    RT_DEPTH_10,
     RT_500K_RAYS,
     RT_200K_RAYS,
     RT_LOW_RAYS,
@@ -304,9 +463,11 @@ ALL_CONFIGS: list[FidelityConfig] = [
     RT_1K_RAYS,
     RT_WITH_DIFFRACTION,
     # Hardware
-    HW_DIPOLE,
-    HW_TR38901,
-    HW_4X4_ARRAY,
+    HW_BASELINE_4X4,
+    HW_4X4_DIPOLE,
+    HW_4X4_ISO,
+    HW_4X4_SPACING_04,
+    HW_4X4_POL_H,
 ]
 
 CONFIGS_BY_NAME: dict[str, FidelityConfig] = {c.name: c for c in ALL_CONFIGS}

@@ -57,12 +57,14 @@ def compute_geometry_metrics(bl_ds, dg_ds):
 
 
 def compute_material_metrics(bl_ds, dg_ds):
-    # NLoS Power Deviation
-    bl_los = bl_ds.los.flatten()
-    nlos_mask = ~bl_los
+    # NLoS Power Deviation — use intersection of NLoS masks
+    # so only users that are NLoS in BOTH datasets are compared
+    bl_los = bl_ds.los.flatten().astype(bool)
+    dg_los = dg_ds.los.flatten().astype(bool)
+    nlos_mask = (~bl_los) & (~dg_los)  # NLoS in both baseline AND degraded
 
     if np.sum(nlos_mask) == 0:
-        return {"nlos_power_rmse_dB": 0.0, "score": 1.0}
+        return {"nlos_power_rmse_dB": 0.0, "n_nlos_compared": 0, "score": 1.0}
 
     bl_pwr_lin = to_linear(bl_ds.pwr)
     dg_pwr_lin = to_linear(dg_ds.pwr)
@@ -83,6 +85,7 @@ def compute_material_metrics(bl_ds, dg_ds):
     # penalty scales with 20dB being "very bad" (0 score)
     return {
         "nlos_power_rmse_dB": float(rmse_dB),
+        "n_nlos_compared": int(np.sum(nlos_mask)),
         "score": float(max(0, 1.0 - (rmse_dB / 20.0))) if not np.isnan(rmse_dB) else 0.0 
     }
 
@@ -152,8 +155,8 @@ def compute_hardware_metrics(bl_ds, dg_ds):
     score = max(0.0, 1.0 - abs(1.0 - ratio))
 
     return {
-        "channel_nmse_linear": dg_c_mean, # Reusing these keys for script compatibility
-        "channel_nmse_dB": ratio, 
+        "capacity_mean": dg_c_mean,
+        "capacity_ratio": ratio,
         "score": float(score)
     }
 
@@ -189,11 +192,22 @@ def main():
     args = parser.parse_args()
 
     configs = [
-        "geo_noise_1m", "geo_noise_5m", "geo_noise_10m",
+        # Geometry
+        "geo_noise_0_1m", "geo_noise_0_5m", "geo_noise_1m", "geo_noise_2m",
+        "geo_noise_3m", "geo_noise_4m", "geo_noise_5m", "geo_noise_7m", "geo_noise_10m",
         "geo_height_noise_3m", "geo_remove_small", "geo_remove_30pct",
-        "mat_all_concrete", "mat_no_scattering",
-        "rt_depth_1", "rt_depth_3", "rt_low_rays", "rt_very_low_rays", "rt_with_diffraction",
-        "hw_dipole", "hw_tr38901", "hw_4x4_array"
+        # Material
+        "baseline_ds", "mat_all_concrete", "mat_all_glass", "mat_all_metal",
+        "mat_all_wood", "mat_all_marble", "mat_all_brick", "mat_no_scattering",
+        # Ray Tracing
+        "rt_depth_0", "rt_depth_1", "rt_depth_2", "rt_depth_3", "rt_depth_4",
+        "rt_depth_5", "rt_depth_6", "rt_depth_7", "rt_depth_8", "rt_depth_9", "rt_depth_10",
+        "rt_500k_rays", "rt_200k_rays", "rt_low_rays", "rt_50k_rays",
+        "rt_20k_rays", "rt_very_low_rays", "rt_5k_rays", "rt_1k_rays",
+        "rt_with_diffraction",
+        # Hardware
+        "hw_baseline_4x4", "hw_4x4_dipole", "hw_4x4_iso",
+        "hw_4x4_spacing04", "hw_4x4_polh"
     ]
     
     all_results = {}
@@ -202,9 +216,29 @@ def main():
     print("=" * 105)
 
     for cfg in configs:
-        res = quantify_scenario(args.baseline, cfg)
+        # Determine baseline for this config
+        current_baseline = args.baseline
+        if "mat_" in cfg:
+            current_baseline = "baseline_ds"
+        elif "hw_" in cfg:
+            current_baseline = "hw_baseline_4x4"
+        elif "rt_depth_" in cfg:
+            current_baseline = "rt_depth_10"
+
+        res = quantify_scenario(current_baseline, cfg)
         if res is None:
             continue
+        
+        # Override baseline against itself so it doesn't get score 0
+        if cfg == current_baseline:
+            res = {
+                "config_name": current_baseline,
+                "unified_fidelity_score": 1.0,
+                "geometry": {"score": 1.0},
+                "material": {"score": 1.0},
+                "ray_tracing": {"score": 1.0},
+                "hardware": {"score": 1.0}
+            }
             
         all_results[cfg] = res
         

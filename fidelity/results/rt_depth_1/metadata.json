@@ -26,7 +26,7 @@
     "tx_array": "1x1",
     "rx_array": "1x1"
   },
-  "runtime_seconds": 18.53115701675415,
+  "runtime_seconds": 27.29159379005432,
   "scenario_name": "rt_depth_1",
   "scene_folder": ""
 }

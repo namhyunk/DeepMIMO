@@ -26,7 +26,7 @@
     "tx_array": "1x1",
     "rx_array": "1x1"
   },
-  "runtime_seconds": 7.727903127670288,
+  "runtime_seconds": 11.031242847442627,
   "scenario_name": "geo_noise_3m",
   "scene_folder": ""
 }

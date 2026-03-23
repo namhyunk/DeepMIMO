@@ -26,7 +26,7 @@
     "tx_array": "1x1",
     "rx_array": "1x1"
   },
-  "runtime_seconds": 9.985931634902954,
+  "runtime_seconds": 21.940367460250854,
   "scenario_name": "geo_remove_small",
   "scene_folder": ""
 }

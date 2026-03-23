@@ -19,7 +19,7 @@ def main():
             bl_ds = dm.load("baseline")
             dg_ds = dm.load(r)
             hw = compute_hardware_metrics(bl_ds, dg_ds)
-            rt_nmse.append(hw["channel_nmse_dB"])
+            rt_nmse.append(hw["capacity_ratio"])
         except Exception as e:
             rt_nmse.append(float('nan'))
             print(f"Error loading {r}: {e}")

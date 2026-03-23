@@ -57,18 +57,24 @@ def compute_path_loss_error(
     """Compute path loss error between baseline and degraded.
 
     Args:
-        baseline_pwr: Baseline power [N_UE, N_paths] (linear scale).
-        degraded_pwr: Degraded power [N_UE, N_paths] (linear scale).
+        baseline_pwr: Baseline power [N_UE, N_paths] — stored as dB in DeepMIMO
+                      (20*log10(amp) = 10*log10(power)).
+        degraded_pwr: Degraded power [N_UE, N_paths] — stored as dB in DeepMIMO.
 
     Returns:
-        Dict with RMSE, MAE, and correlation of total received power.
+        Dict with RMSE, MAE, and correlation of total received power in dB.
     """
-    # Total received power (sum over paths)
-    bl_total = np.nansum(baseline_pwr, axis=-1) if baseline_pwr.ndim > 1 else baseline_pwr
-    dg_total = np.nansum(degraded_pwr, axis=-1) if degraded_pwr.ndim > 1 else degraded_pwr
-
-    # Convert to dB (avoid log of zero)
     eps = 1e-30
+
+    # Convert from dB to linear before summing over paths
+    bl_lin = 10 ** (baseline_pwr / 10.0)
+    dg_lin = 10 ** (degraded_pwr / 10.0)
+
+    # Total received power in linear (sum over paths)
+    bl_total = np.nansum(bl_lin, axis=-1) if bl_lin.ndim > 1 else bl_lin
+    dg_total = np.nansum(dg_lin, axis=-1) if dg_lin.ndim > 1 else dg_lin
+
+    # Convert back to dB for comparison
     bl_db = 10 * np.log10(np.maximum(bl_total, eps))
     dg_db = 10 * np.log10(np.maximum(dg_total, eps))
 

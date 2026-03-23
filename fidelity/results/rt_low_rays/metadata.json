@@ -26,7 +26,7 @@
     "tx_array": "1x1",
     "rx_array": "1x1"
   },
-  "runtime_seconds": 22.43751835823059,
+  "runtime_seconds": 9.790269374847412,
   "scenario_name": "rt_low_rays",
   "scene_folder": ""
 }

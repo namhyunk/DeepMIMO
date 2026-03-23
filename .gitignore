@@ -59,6 +59,10 @@ ai-ran/*
 docs/_build/
 docs/api/_autosummary/
 fidelity/docs/
+fidelity/results/
+fidelity_run*.log
+fidelity/*.log
+**/*.pkl
 docs/manual_full.ipynb
 
 # Gitignore Defaults
