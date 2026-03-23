@@ -58,7 +58,7 @@ ai-ran/*
 # Documentation
 docs/_build/
 docs/api/_autosummary/
-fidelity/docs/
+# fidelity/docs/ (Removing from ignore to track the summary)
 fidelity/results/
 fidelity_run*.log
 fidelity/*.log
