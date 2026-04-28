@@ -44,6 +44,10 @@ fidelity/*.log
 fidelity/results/
 fidelity/results_*/
 fidelity/*_deepmimo/
+# Stray DeepMIMO conversion outputs at repo root (e.g. when --output is the
+# repo root by mistake). Matches '<scene>_<config>_deepmimo/' top-level only.
+/*_deepmimo/
+fidelity/experiments/sbatch/logs/
 fidelity/sionna_*.pkl
 # Latex auxiliary (regenerable)
 fidelity/docs/*.aux
