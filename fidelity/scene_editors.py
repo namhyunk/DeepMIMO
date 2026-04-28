@@ -26,6 +26,11 @@ if TYPE_CHECKING:
     from fidelity.config import FidelityConfig
 
 
+def _scalar(val) -> float:
+    """Safely extract a Python float from a scalar, 0-d array, or 1-element array."""
+    return float(np.asarray(val).flat[0])
+
+
 def add_position_noise(scene: Scene, std: float, seed: int = 42) -> None:
     """Add Gaussian noise to building XY positions.
 
@@ -53,11 +58,11 @@ def add_position_noise(scene: Scene, std: float, seed: int = 42) -> None:
         noise_x = rng.normal(0, std)
         noise_y = rng.normal(0, std)
 
-        pos_arr = np.array(current_pos)
+        pos_arr = np.asarray(current_pos).flatten()
         new_pos = mi.Vector3f(
-            float(pos_arr[0]) + noise_x,
-            float(pos_arr[1]) + noise_y,
-            float(pos_arr[2]),  # Keep Z unchanged
+            _scalar(pos_arr[0]) + noise_x,
+            _scalar(pos_arr[1]) + noise_y,
+            _scalar(pos_arr[2]),
         )
         obj.position = new_pos
 
@@ -85,16 +90,16 @@ def add_height_noise(scene: Scene, std: float, seed: int = 42) -> None:
             continue
 
         current_pos = obj.position
-        pos_arr = np.array(current_pos)
-        height = float(pos_arr[2])
+        pos_arr = np.asarray(current_pos).flatten()
+        height = _scalar(pos_arr[2])
 
         # Add noise directly to height (can't go below ground)
         noise_z = rng.normal(0, std)
         new_height = max(0.5, height + noise_z)  # Minimum 0.5m
 
         obj.position = mi.Vector3f(
-            float(pos_arr[0]),
-            float(pos_arr[1]),
+            _scalar(pos_arr[0]),
+            _scalar(pos_arr[1]),
             new_height,
         )
 
@@ -121,7 +126,7 @@ def remove_small_buildings(scene: Scene, min_height: float) -> None:
         # In Sionna scenes from OSM, building height is typically encoded
         # in the mesh extent, not just the position. We use position Z
         # as a heuristic when mesh data isn't easily accessible.
-        height = float(np.array(obj.position)[2])
+        height = _scalar(np.asarray(obj.position).flatten()[2])
         if height > 0 and height < min_height:
             to_remove.append(obj_name)
 

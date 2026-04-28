@@ -161,35 +161,38 @@ def compute_hardware_metrics(bl_ds, dg_ds):
     }
 
 
-def quantify_scenario(baseline_name, degraded_name):
-    try:
-        bl_ds = dm.load(baseline_name)
-        dg_ds = dm.load(degraded_name)
-
-        geo = compute_geometry_metrics(bl_ds, dg_ds)
-        mat = compute_material_metrics(bl_ds, dg_ds)
-        rt = compute_ray_tracing_metrics(bl_ds, dg_ds)
-        hw = compute_hardware_metrics(bl_ds, dg_ds)
-
-        unified_score = (geo["score"] + mat["score"] + rt["score"] + hw["score"]) / 4.0
-
-        return {
-            "config_name": degraded_name,
-            "unified_fidelity_score": float(unified_score),
-            "geometry": geo,
-            "material": mat,
-            "ray_tracing": rt,
-            "hardware": hw
-        }
-    except Exception as e:
-        print(f"Error processing {degraded_name}: {e}")
-        return None
-
 def main():
     parser = argparse.ArgumentParser(description="Quantify fidelity components.")
     parser.add_argument("--baseline", type=str, default="baseline")
+    parser.add_argument("--scenario", type=str, default="simple_street_canyon")
     parser.add_argument("--output", type=str, default=None)
     args = parser.parse_args()
+
+    results_dir = Path(__file__).resolve().parent / "results" / args.scenario
+
+    def quantify_scenario(bl_name, dg_name):
+        try:
+            bl_ds = dm.load(str(results_dir / bl_name))
+            dg_ds = dm.load(str(results_dir / dg_name))
+
+            geo = compute_geometry_metrics(bl_ds, dg_ds)
+            mat = compute_material_metrics(bl_ds, dg_ds)
+            rt = compute_ray_tracing_metrics(bl_ds, dg_ds)
+            hw = compute_hardware_metrics(bl_ds, dg_ds)
+
+            unified_score = (geo["score"] + mat["score"] + rt["score"] + hw["score"]) / 4.0
+
+            return {
+                "config_name": dg_name,
+                "unified_fidelity_score": float(unified_score),
+                "geometry": geo,
+                "material": mat,
+                "ray_tracing": rt,
+                "hardware": hw
+            }
+        except Exception as e:
+            print(f"Error processing {dg_name}: {e}")
+            return None
 
     configs = [
         # Geometry
@@ -255,7 +258,7 @@ def main():
 
     out_path = args.output
     if not out_path:
-        out_path = str(Path(__file__).resolve().parent / "results" / "fidelity_metrics.json")
+        out_path = str(results_dir / "fidelity_metrics.json")
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w") as f:
         json.dump(all_results, f, indent=2)

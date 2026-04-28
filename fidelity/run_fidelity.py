@@ -120,7 +120,7 @@ BASE_RT_PARAMS = {
     # Sionna specific
     "los": True,
     "synthetic_array": True,
-    "batch_size": 15,
+    "batch_size": 64,  # Maximized for 24GiB GPU throughput with 441 users
     "use_builtin_scene": False,
     "builtin_scene_path": "",
     "path_inspection_func": None,
@@ -131,8 +131,8 @@ BASE_RT_PARAMS = {
     "edge_diffraction": False,
     "scat_keep_prob": 0.001,
     # Sionna 1.x
-    "n_samples_per_src": 1_000_000,
-    "max_paths_per_src": 1_000_000,
+    "n_samples_per_src": 100_000, # 1M -> 100K for rapid comparison
+    "max_paths_per_src": 100_000,
     "refraction": False,
     "cpu_offload": True,
     "rx_ori": None,
@@ -427,6 +427,12 @@ Examples:
         help="List all available configs and exit",
     )
     parser.add_argument(
+        "--num-rx",
+        type=int,
+        default=None,
+        help="Limit number of RX positions (default: all)",
+    )
+    parser.add_argument(
         "--all",
         action="store_true",
         help="Run all configs",
@@ -468,10 +474,14 @@ Examples:
     scene_folder, use_builtin, builtin_scene_path = parse_scene_arg(args.scene)
 
     # Default output directory
+    scene_name = args.scene.split(":")[-1].split("/")[-1]
     if args.output is None:
-        output_root = str(Path(__file__).resolve().parent / "results")
+        output_root = Path(__file__).resolve().parent / "results" / scene_name
     else:
-        output_root = args.output
+        output_root = Path(args.output) / scene_name
+    
+    output_root.mkdir(parents=True, exist_ok=True)
+    print(f"Scenario: {scene_name} | Output: {output_root}")
 
     # Generate positions
     from deepmimo.pipelines.txrx_placement import gen_plane_grid
@@ -481,6 +491,8 @@ Examples:
         args.rx_spacing,
         args.rx_height,
     )
+    if args.num_rx is not None:
+        rx_pos = rx_pos[:args.num_rx]
     tx_pos = np.array([[20, 20, args.tx_height]])
 
     print(f"TX positions: {tx_pos.shape[0]} stations")

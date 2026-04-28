@@ -46,7 +46,6 @@ class FidelityConfig:
     antenna_pattern: str = "iso"  # "iso", "dipole", "hw_dipole", "tr38901"
     num_tx_ant_rows: int = 1
     num_tx_ant_cols: int = 1
-    num_tx_ant_cols: int = 1
     num_rx_ant_rows: int = 1
     num_rx_ant_cols: int = 1
     antenna_spacing: float = 0.5  # Wavelength spacing between elements

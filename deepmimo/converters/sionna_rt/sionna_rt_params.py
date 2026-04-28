@@ -15,10 +15,22 @@ and DeepMIMO's standardized ray tracing parameters.
 from dataclasses import dataclass
 from pathlib import Path
 
+import numpy as np
+
 from deepmimo.config import config
 from deepmimo.consts import RAYTRACER_NAME_SIONNA
 from deepmimo.core.rt_params import RayTracingParameters
 from deepmimo.utils import load_pickle
+
+
+def _to_int(val) -> int:
+    """Safely convert a scalar or 0-d/1-element numpy array to int."""
+    return int(np.asarray(val).flat[0])
+
+
+def _to_bool(val) -> bool:
+    """Safely convert a scalar or 0-d/1-element numpy array to bool."""
+    return bool(np.asarray(val).flat[0])
 
 
 def read_rt_params(load_folder: str) -> dict:
@@ -112,25 +124,25 @@ class SionnaRayTracingParameters(RayTracingParameters):
             "raytracer_name": RAYTRACER_NAME_SIONNA,
             "raytracer_version": raw_params.get("raytracer_version", config.get("sionna_version")),
             # Base required parameters
-            "frequency": int(raw_params["frequency"]),
+            "frequency": _to_int(raw_params["frequency"]),
             # Ray tracing interaction settings
-            "max_path_depth": int(raw_params["max_depth"]),
-            "max_reflections": int(raw_params["max_depth"]) if raw_params["reflection"] else 0,
-            "max_diffractions": int(
+            "max_path_depth": _to_int(raw_params["max_depth"]),
+            "max_reflections": _to_int(raw_params["max_depth"]) if raw_params["reflection"] else 0,
+            "max_diffractions": _to_int(
                 raw_params["diffraction"],
             ),  # Sionna only supports 1 diffraction event
-            "max_scattering": int(
+            "max_scattering": _to_int(
                 raw_params["scattering"],
             ),  # Sionna only supports 1 scattering event
             "max_transmissions": 0,  # Sionna does not support transmissions
             # Terrain interaction settings
-            "terrain_reflection": bool(raw_params["reflection"]),
-            "terrain_diffraction": raw_params[
+            "terrain_reflection": _to_bool(raw_params["reflection"]),
+            "terrain_diffraction": _to_bool(raw_params[
                 "diffraction"
-            ],  # Sionna only supports 1 diffraction, may be on terrain
-            "terrain_scattering": raw_params["scattering"],
+            ]),  # Sionna only supports 1 diffraction, may be on terrain
+            "terrain_scattering": _to_bool(raw_params["scattering"]),
             # Details on diffraction, scattering, and transmission
-            "diffuse_reflections": int(raw_params["max_depth"])
+            "diffuse_reflections": _to_int(raw_params["max_depth"])
             - 1,  # Sionna only supports diffuse reflections
             "diffuse_diffractions": 0,  # Sionna supports one diffraction, no diffuse scattering
             "diffuse_transmissions": 0,  # Sionna does not support transmissions

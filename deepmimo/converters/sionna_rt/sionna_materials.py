@@ -6,8 +6,17 @@ This module handles loading and converting material data from Sionna's format to
 from pathlib import Path
 from typing import Any
 
+import numpy as np
+
 from deepmimo.core.materials import Material, MaterialList
 from deepmimo.utils import load_pickle
+
+
+def _sf(val: Any, default: float = 0.0) -> float:
+    """Safely convert a scalar or 0-d/1-element numpy array to float."""
+    if val is None:
+        return default
+    return float(np.asarray(val).flat[0])
 
 
 def read_materials(load_folder: str) -> tuple[dict, dict[str, int]]:
@@ -44,20 +53,17 @@ def read_materials(load_folder: str) -> tuple[dict, dict[str, int]]:
         scattering_model = Material.SCATTERING_NONE if not scat_coeff else scattering_model
 
         # Create Material object
-        def safe_float(val: Any, default: float = 0.0) -> float:
-            return float(val) if val is not None else float(default)
-
         material = Material(
             id=i,
             name=f"material_{i}",  # Default name if not provided
-            permittivity=float(mat_property["relative_permittivity"]),
-            conductivity=float(mat_property["conductivity"]),
+            permittivity=_sf(mat_property["relative_permittivity"]),
+            conductivity=_sf(mat_property["conductivity"]),
             scattering_model=scattering_model,
-            scattering_coefficient=float(scat_coeff),
-            cross_polarization_coefficient=float(mat_property["xpd_coefficient"]),
-            alpha_r=safe_float(mat_property["alpha_r"]),
-            alpha_i=safe_float(mat_property["alpha_i"]),
-            lambda_param=safe_float(mat_property["lambda_"]),
+            scattering_coefficient=_sf(scat_coeff),
+            cross_polarization_coefficient=_sf(mat_property["xpd_coefficient"]),
+            alpha_r=_sf(mat_property["alpha_r"]),
+            alpha_i=_sf(mat_property["alpha_i"]),
+            lambda_param=_sf(mat_property["lambda_"]),
         )
         materials.append(material)
 

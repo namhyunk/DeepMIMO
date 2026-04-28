@@ -30,8 +30,8 @@ SIONNA_TYPE_RIS = 4
 
 
 def _is_sionna_v1(sionna_version: str) -> bool:
-    """Determine if Sionna version is 1.x or higher."""
-    return sionna_version.startswith("1.")
+    """Determine if Sionna version is 1.x or higher (includes 2.x+)."""
+    return not sionna_version.startswith("0.")
 
 
 def _preallocate_data(n_rx: int) -> dict:
