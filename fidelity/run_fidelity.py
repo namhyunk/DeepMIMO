@@ -43,9 +43,11 @@ from fidelity.config import (  # noqa: E402
 from fidelity.material_editors import build_material_editor  # noqa: E402
 from fidelity.scene_editors import build_geometry_editor  # noqa: E402
 
-# GPU configuration
-gpu_num = 0
-os.environ["CUDA_VISIBLE_DEVICES"] = f"{gpu_num}"
+# GPU configuration: respect SLURM/launcher's CUDA_VISIBLE_DEVICES if set,
+# otherwise fall back to GPU 0. Hardcoding "0" here would override the
+# scheduler-assigned GPU on multi-GPU nodes and silently bind to the wrong
+# device.
+os.environ.setdefault("CUDA_VISIBLE_DEVICES", "0")
 
 
 # ============================================================================
@@ -232,8 +234,16 @@ def run_single_config(
     rt_path = raytrace_sionna(scene_folder, tx_pos, rx_pos, **params)
     t_elapsed = time.time() - t_start
 
-    # Convert to DeepMIMO format
-    scen_name = dm.convert(rt_path, scenario_name=config.name, overwrite=True)
+    # Convert to DeepMIMO format. Namespace the scenario by the scene's
+    # output subdir so that cross-scene runs (canyon, munich, dichasus...)
+    # do not race on the same global slot in deepmimo_scenarios/. Without
+    # this, the last scene to write 'baseline'/'geo_*'/etc. silently wins
+    # and the earlier scene's data is lost.
+    scene_short = os.path.basename(str(output_root).rstrip(os.sep))
+    scenario_full_name = (
+        f"{scene_short}_{config.name}" if scene_short else config.name
+    )
+    scen_name = dm.convert(rt_path, scenario_name=scenario_full_name, overwrite=True)
 
     # Save metadata
     metadata = {

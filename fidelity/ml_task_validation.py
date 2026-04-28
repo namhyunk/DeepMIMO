@@ -397,30 +397,42 @@ def plot_results(results: list[dict], output_dir: Path):
 # Main experiment loop
 # ============================================================================
 
+def _resolve_scenario(name: str, scenario_prefix: str | None):
+    """Try '<prefix>_<name>' first, fall back to bare '<name>'.
+
+    Mirrors the namespacing applied by run_fidelity.run_single_config so
+    cross-scene runs do not collide on the same scenario slot.
+    """
+    candidates = [f"{scenario_prefix}_{name}"] if scenario_prefix else []
+    candidates.append(name)
+    last_err = None
+    for c in candidates:
+        try:
+            return dm.load(c)
+        except Exception as e:
+            last_err = e
+    raise last_err
+
+
 def run_experiment(configs: list[tuple], output_dir: Path,
-                   n_beams: int = N_BEAMS, seed: int = 42, device: str = "cpu"):
+                   n_beams: int = N_BEAMS, seed: int = 42, device: str = "cpu",
+                   scenario_prefix: str | None = None):
     np.random.seed(seed)
     torch.manual_seed(seed)
-
-    # --- Fixed data split (same indices for all configs) ---
-    n_ue = 2601
-    idx = np.random.permutation(n_ue)
-    n_train = int(0.70 * n_ue)
-    n_val = int(0.15 * n_ue)
-    train_idx = idx[:n_train]
-    val_idx = idx[n_train:n_train + n_val]
-    test_idx = idx[n_train + n_val:]
 
     # --- Codebook ---
     n_tx = 8
     codebook = generate_dft_codebook(n_tx, n_beams)
 
     # --- Load and cache baselines ---
+    # We need a baseline loaded *before* the train/val/test split so the
+    # split sizes match the actual UE count (was hard-coded to 2601, which
+    # crashed for 441-UE Munich/canyon sweeps).
     baseline_names = sorted(set(bl for _, bl, *_ in configs))
     baselines = {}
     for bl_name in baseline_names:
         print(f"Loading baseline: {bl_name}")
-        ds = dm.load(bl_name)
+        ds = _resolve_scenario(bl_name, scenario_prefix)
         baselines[bl_name] = {
             "channels": ds.channels,
             "beam_features": get_beam_features(ds),
@@ -428,6 +440,16 @@ def run_experiment(configs: list[tuple], output_dir: Path,
             "loc_features": get_loc_features(ds),
             "loc_labels": get_loc_labels(ds),
         }
+
+    # --- Fixed data split (same indices for all configs) ---
+    n_ue = next(iter(baselines.values()))["channels"].shape[0]
+    idx = np.random.permutation(n_ue)
+    n_train = int(0.70 * n_ue)
+    n_val = int(0.15 * n_ue)
+    train_idx = idx[:n_train]
+    val_idx = idx[n_train:n_train + n_val]
+    test_idx = idx[n_train + n_val:]
+    print(f"Data split: n_ue={n_ue}, train={len(train_idx)}, val={len(val_idx)}, test={len(test_idx)}")
 
     # --- Run baseline self-evaluation first ---
     results = []
@@ -476,7 +498,7 @@ def run_experiment(configs: list[tuple], output_dir: Path,
         print(f"{'='*60}")
 
         bl_data = baselines[bl_name]
-        ds = dm.load(cfg_name)
+        ds = _resolve_scenario(cfg_name, scenario_prefix)
 
         # Channel NMSE
         nmse_dB = compute_nmse(bl_data["channels"], ds.channels)
@@ -552,6 +574,11 @@ def main():
     parser.add_argument("--output", type=str, default=None)
     parser.add_argument("--device", type=str, default="cpu")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--scenario", type=str, default=None,
+                        help="Scene prefix used by the sweep "
+                             "(e.g. 'munich' or 'simple_street_canyon'). "
+                             "If set, dm.load will try '<scenario>_<config>' "
+                             "before falling back to the bare config name.")
     args = parser.parse_args()
 
     output_dir = Path(__file__).resolve().parent / "results"
@@ -572,7 +599,10 @@ def main():
     print("=" * 60)
 
     # Run
-    results = run_experiment(configs, output_dir, seed=args.seed, device=args.device)
+    results = run_experiment(
+        configs, output_dir, seed=args.seed, device=args.device,
+        scenario_prefix=args.scenario,
+    )
 
     # Print table
     print_results_table(results)

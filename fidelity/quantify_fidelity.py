@@ -170,10 +170,23 @@ def main():
 
     results_dir = Path(__file__).resolve().parent / "results" / args.scenario
 
+    # Sweep registers each config under '<scene>_<config>' in the global
+    # deepmimo_scenarios/ registry (see run_fidelity.run_single_config).
+    # Load by that namespaced name; fall back to the bare config name for
+    # legacy unnamespaced runs.
+    def _scenario_name(cfg):
+        return f"{args.scenario}_{cfg}"
+
     def quantify_scenario(bl_name, dg_name):
         try:
-            bl_ds = dm.load(str(results_dir / bl_name))
-            dg_ds = dm.load(str(results_dir / dg_name))
+            try:
+                bl_ds = dm.load(_scenario_name(bl_name))
+            except Exception:
+                bl_ds = dm.load(bl_name)
+            try:
+                dg_ds = dm.load(_scenario_name(dg_name))
+            except Exception:
+                dg_ds = dm.load(dg_name)
 
             geo = compute_geometry_metrics(bl_ds, dg_ds)
             mat = compute_material_metrics(bl_ds, dg_ds)
@@ -259,7 +272,13 @@ def main():
     out_path = args.output
     if not out_path:
         out_path = str(results_dir / "fidelity_metrics.json")
-    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    elif os.path.isdir(out_path) or not out_path.endswith(".json"):
+        # --output is a directory (e.g. 'fidelity/results'); land the JSON
+        # under <output>/<scenario>/fidelity_metrics.json.
+        out_path = os.path.join(out_path, args.scenario, "fidelity_metrics.json")
+    parent = os.path.dirname(out_path)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
     with open(out_path, "w") as f:
         json.dump(all_results, f, indent=2)
     

@@ -35,15 +35,40 @@ def set_uniform_material(scene: Scene, material_name: str) -> None:
     """
     terrain_keywords = ["plane", "floor", "terrain", "roads", "paths", "road", "path"]
 
-    # Get reference to the target material from the scene
-    if material_name not in scene.radio_materials:
-        print(
-            f"[material_editor] Warning: material '{material_name}' not found. "
-            f"Available: {list(scene.radio_materials.keys())}"
-        )
-        return
+    # Resolve material name across Sionna 1.x ('itu_concrete') and 2.x
+    # ('concrete') registries. If the scene does not register the material
+    # at all (e.g. Munich has no 'glass'), auto-construct an ITURadioMaterial
+    # so configs targeting 'itu_*' still produce a real material change
+    # rather than silently no-op'ing back to baseline.
+    available = dict(scene.radio_materials)
+    itu_type = (
+        material_name[len("itu_"):]
+        if material_name.startswith("itu_")
+        else material_name
+    )
+    candidates = [material_name, itu_type, f"itu_{itu_type}"]
+    resolved = next((c for c in candidates if c in available), None)
 
-    target_material = scene.radio_materials[material_name]
+    if resolved is not None:
+        target_material = available[resolved]
+    else:
+        try:
+            from sionna.rt import ITURadioMaterial
+            target_material = ITURadioMaterial(name=material_name, itu_type=itu_type)
+            scene.add(target_material)
+            print(
+                f"[material_editor] Registered ITU material '{material_name}' "
+                f"(itu_type='{itu_type}') — not present in scene."
+            )
+        except Exception as e:
+            print(
+                f"[material_editor] Warning: material '{material_name}' not found "
+                f"and ITURadioMaterial auto-registration failed "
+                f"(itu_type='{itu_type}'): {type(e).__name__}: {e}. "
+                f"Available: {list(available.keys())}"
+            )
+            return
+
     count = 0
 
     for obj_name, obj in scene.objects.items():
