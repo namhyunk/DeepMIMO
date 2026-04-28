@@ -27,8 +27,20 @@ dependencies = [
     "numpy>=1.19.5,<2.3",
     "scipy>=1.6.2",  # only for .mat and ConvexHulls
     "tqdm>=4.59.0",
-    "requests"
+    "requests",
+    # Pin to a CUDA 12.1 build because the cu130 wheels drop Volta
+    # (compute 7.0) — needed for V100 nodes. Version range allows uv to
+    # pick the latest matching wheel from the pytorch cu121 index.
+    "torch>=2.4,<2.7",
 ]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu121" }
+
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
 
 [tool.setuptools.packages.find]
 include = ["deepmimo*"]
@@ -108,8 +120,8 @@ sionna = [
     "numpy<2.0; python_version == '3.11'",
     "ipykernel",
 
-    # Sionna 1.0
-    "sionna-rt==1.0.2",  # Sionna Ray Tracer (pins "mitsuba==3.6.2")
+    # Sionna 2.0
+    "sionna-rt==2.0.1",  # Sionna Ray Tracer
 
     # Development
     "jupyter"
@@ -132,7 +144,7 @@ all = [
     "plyfile",           
     
     # Sionna
-    "sionna-rt==1.0.2",
+    "sionna-rt==2.0.1",
 
     # AODT
     "pyarrow",
