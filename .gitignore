@@ -38,6 +38,39 @@ executables/*
 dev/*
 P2Ms/*
 *.p2m
+
+# Fidelity experiments
+fidelity/*.log
+fidelity/results/
+fidelity/results_*/
+fidelity/*_deepmimo/
+fidelity/sionna_*.pkl
+# Latex auxiliary (regenerable)
+fidelity/docs/*.aux
+fidelity/docs/*.fdb_latexmk
+fidelity/docs/*.fls
+fidelity/docs/*.log
+fidelity/docs/*.out
+fidelity/docs/*.synctex.gz
+fidelity/docs/*.toc
+fidelity/docs/*.nav
+fidelity/docs/*.snm
+fidelity/docs/*.pdf
+fidelity/beamer/*.aux
+fidelity/beamer/*.fdb_latexmk
+fidelity/beamer/*.fls
+fidelity/beamer/*.log
+fidelity/beamer/*.nav
+fidelity/beamer/*.out
+fidelity/beamer/*.snm
+fidelity/beamer/*.synctex.gz
+fidelity/beamer/*.toc
+# DICHASUS analysis caches/outputs
+fidelity/dichasus/results/
+fidelity/dichasus/dcxx/
+fidelity/dichasus/diff-rt-calibration/
+fidelity/dichasus/outcmaes/
+fidelity/dichasus/checkpoints/
 conversion_errors.json
 scripts/b2_direct_upload.py
 # scripts/pipeline_runner.py
